@@ -1,8 +1,26 @@
 # knife-vcenter
 
-This is a Kniffe plugin that allows interaction with vSphere using the vSphere Automation SDK.
+[![Gem Version](https://badge.fury.io/rb/knife-vcenter.svg)](https://rubygems.org/gems/knife-vcenter)
+[![Build Status](https://travis-ci.org/chef/knife-vcenter.svg?branch=master)](https://travis-ci.org/chef/knife-vcenter)
+[![Dependency Status](https://gemnasium.com/chef/knife-vcenter.svg)](https://gemnasium.com/chef/knife-vcenter)
+[![Inline docs](http://inch-ci.org/github/chef/knife-vcenter.svg?branch=master)](http://inch-ci.org/github/chef/knife-vcenter)
 
-# vCenter
+This is a `knife` plugin that allows interaction with vSphere using the vSphere Automation SDK.
+
+Please refer to the [CHANGELOG](CHANGELOG.md) for version history and known issues.
+
+## Requirements
+
+- Chef 13.0 higher
+- Ruby 2.3.3 or higher
+
+## Installation
+
+Using [ChefDK](https://downloads.chef.io/chef-dk/), simply install the Gem:
+
+```bash
+chef gem install knife-vcenter
+```
 
 ## Configuration
 
@@ -12,7 +30,7 @@ In order to communicate with vSphere, you must specify your user credentials. Yo
 knife[:vcenter_username] = "myuser"
 knife[:vcenter_password] = "mypassword"
 knife[:vcenter_host] = "172.16.20.2"
-knife[:vcenter_disable_ssl_verify] = true # if you want to disable SSL checking 
+knife[:vcenter_disable_ssl_verify] = true # if you want to disable SSL checking
 ```
 
 or alternatively you can supply them on the command-line:
@@ -35,7 +53,7 @@ domain-c123  Cluster  False  False
 
 ## knife vcenter datacenter list
 
-List the data centers configures in the vSPeher envirnonment
+List the data centers configures in the vSPeher environment
 
 ```
 $ knife vcenter datacenter list
@@ -130,4 +148,48 @@ Bootstrapping the server by using bootstrap_protocol: ssh and image_os_type: lin
 Waiting for sshd to host (10.0.0.167)
 WARNING: Deleted node example-01
 WARNING: Deleted client example-01
+```
+
+## Contributing
+
+For information on contributing to this project see <https://github.com/chef/chef/blob/master/CONTRIBUTING.md>
+
+## Development
+
+* Report issues/questions/feature requests on [GitHub Issues][issues]
+
+Pull requests are very welcome! Make sure your patches are well tested.
+Ideally create a topic branch for every separate change you make. For
+example:
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Run the tests and rubocop, `bundle exec rake spec` and `bundle exec rake rubocop`
+4. Commit your changes (`git commit -am 'Added some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create new Pull Request
+
+
+## License
+
+Author:: Russell Seymour ([rseymour@chef.io](mailto:rseymour@chef.io))
+
+Author:: JJ Asghar ([jj@chef.io](mailto:jj@chef.io))
+
+Copyright:: Copyright (c) 2017 Chef Software, Inc.
+
+License:: Apache License, Version 2.0
+
+```text
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
