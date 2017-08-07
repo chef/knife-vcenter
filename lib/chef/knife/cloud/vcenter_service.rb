@@ -116,7 +116,7 @@ class Chef
 
           when "create"
 
-            # Create the placement object 
+            # Create the placement object
             placementspec = Com::Vmware::Vcenter::VM::PlacementSpec.new()
             placementspec.folder = get_folder(options[:folder])
             placementspec.host = get_host(options[:targethost])
@@ -208,6 +208,7 @@ class Chef
         end
 
         def server_summary(server, _coloumns_with_inf=nil)
+          require 'pry'; binding.pry
           msg_pair('ID', server.vm)
           msg_pair('Name', server.name)
           msg_pair('Power State', server.power_state)

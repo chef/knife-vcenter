@@ -27,9 +27,9 @@ class Chef
 
         def create_service_instance
           Chef::Knife::Cloud::VcenterService.new(username: locate_config_value(:vcenter_username),
-                                                password: locate_config_value(:vcenter_password),
-                                                host: locate_config_value(:vcenter_host),
-                                                verify_ssl: verify_ssl?)
+                                                 password: locate_config_value(:vcenter_password),
+                                                 host: locate_config_value(:vcenter_host),
+                                                 verify_ssl: verify_ssl?)
         end
 
         def verify_ssl?

@@ -62,7 +62,7 @@ class Chef
           @create_options = {
             name:         @name_args[0],
             type:         "create",
-            targethost:         locate_config_value(:targethost),
+            targethost:   locate_config_value(:targethost),
             folder:       locate_config_value(:folder),
             datastore:    locate_config_value(:datastore)
           }

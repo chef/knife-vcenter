@@ -26,22 +26,22 @@ class Chef
         def self.included(includer)
           includer.class_eval do
             option :vcenter_username,
-              long:         '--vcenter-username USERNAME',
-              description:  'Username to use to connect to the VCenter API'
+                   long:         '--vcenter-username USERNAME',
+                   description:  'Username to use to connect to the VCenter API'
 
             option :vcenter_password,
-              long:         '--vcenter-password PASSWORD',
-              description:  'Password associated with the specified user'
+                   long:         '--vcenter-password PASSWORD',
+                   description:  'Password associated with the specified user'
 
             option :vcenter_host,
-              long:         '--vcenter-host HOST',
-              description:  'Host to target for operations'
+                   long:         '--vcenter-host HOST',
+                   description:  'Host to target for operations'
 
             option :vcenter_disable_ssl_verify,
-              long:         '--vcenter-disable-ssl-verify',
-              description:  'Skip any SSL verification for the API',
-              boolean:      true,
-              default:      false
+                   long:         '--vcenter-disable-ssl-verify',
+                   description:  'Skip any SSL verification for the API',
+                   boolean:      true,
+                   default:      false
           end
         end
       end

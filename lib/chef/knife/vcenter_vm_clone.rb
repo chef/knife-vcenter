@@ -32,7 +32,7 @@ class Chef
         include VcenterServiceOptions
         include ServerCreateOptions
 
-        banner 'knife vcenter vm create NAME'
+        banner 'knife vcenter vm clone NAME'
 
         option :template,
                long:        "--template NAME",

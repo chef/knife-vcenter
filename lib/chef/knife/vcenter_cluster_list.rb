@@ -49,9 +49,9 @@ class Chef
         end
 
         def format_boolean(status)
-          status_colour = status ? :green : :red
-          ui.color(status ? "True" : "False", status_colour)
-        end        
+          status_color = status ? :green : :red
+          ui.color(status ? "True" : "False", status_color)
+        end
       end
     end
   end
