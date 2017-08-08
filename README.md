@@ -29,11 +29,11 @@ Using [ChefDK](https://downloads.chef.io/chef-dk/), simply install the Gem:
 chef gem install knife-vcenter
 ```
 
-If you're using bundler, simply add Chef and knife-vsphere to your Gemfile:
+If you're using bundler, simply add Chef and knife-vcenter to your Gemfile:
 
 ```ruby
 gem 'chef'
-gem 'knife-vsphere
+gem 'knife-vcenter'
 ```
 
 ## Configuration
