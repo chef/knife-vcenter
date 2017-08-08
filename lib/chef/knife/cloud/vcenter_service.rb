@@ -208,7 +208,6 @@ class Chef
         end
 
         def server_summary(server, _coloumns_with_inf=nil)
-          require 'pry'; binding.pry
           msg_pair('ID', server.vm)
           msg_pair('Name', server.name)
           msg_pair('Power State', server.power_state)
