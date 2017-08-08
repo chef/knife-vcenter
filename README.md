@@ -5,6 +5,13 @@
 [![Dependency Status](https://gemnasium.com/chef/knife-vcenter.svg)](https://gemnasium.com/chef/knife-vcenter)
 [![Inline docs](http://inch-ci.org/github/chef/knife-vcenter.svg?branch=master)](http://inch-ci.org/github/chef/knife-vcenter)
 
+This is the official Chef Knife plugin for VMware REST API. This plugin gives knife the ability to create, bootstrap, and manage VMware vms.
+- Documentation: [https://github.com/chef/knife-vcenter/blob/master/README.md](https://github.com/chef/knife-vcenter/blob/master/README.md)
+- Source: [https://github.com/chef/knife-vcenter/tree/master](https://github.com/chef/knife-vcenter/tree/master)
+- Issues: [https://github.com/chef/knife-vcenter/issues](https://github.com/chef/knife-vcenter/issues)
+- Slack: sign up: https://code.vmware.com/slack/ slack channel: #chef
+- Mailing list: [https://discourse.chef.io/](https://discourse.chef.io/)
+
 This is a `knife` plugin that allows interaction with vSphere using the vSphere Automation SDK.
 
 Please refer to the [CHANGELOG](CHANGELOG.md) for version history and known issues.
@@ -20,6 +27,13 @@ Using [ChefDK](https://downloads.chef.io/chef-dk/), simply install the Gem:
 
 ```bash
 chef gem install knife-vcenter
+```
+
+If you're using bundler, simply add Chef and knife-vsphere to your Gemfile:
+
+```ruby
+gem 'chef'
+gem 'knife-vsphere
 ```
 
 ## Configuration
