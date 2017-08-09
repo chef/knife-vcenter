@@ -50,7 +50,7 @@ class Chef
 
         def format_power_status(status)
           status_check = status.value
-          status_colour = case status_check
+          status_color = case status_check
                           when 'POWERED_OFF'
                             :red
                           when 'POWERED_ON'
@@ -59,8 +59,8 @@ class Chef
                             :yellow
                           end
 
-          ui.color(status.value, status_colour)
-        end        
+          ui.color(status.value, status_color)
+        end
       end
     end
   end

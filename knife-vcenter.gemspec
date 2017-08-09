@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'debase'
   spec.add_development_dependency 'github_changelog_generator'
+  spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake',    '~> 10.0'
   spec.add_development_dependency 'rubocop', '~> 0.35'
   spec.add_development_dependency 'ruby-debug-ide', '~> 0.6.0'

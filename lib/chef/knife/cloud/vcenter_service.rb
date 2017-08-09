@@ -116,7 +116,7 @@ class Chef
 
           when "create"
 
-            # Create the placement object 
+            # Create the placement object
             placementspec = Com::Vmware::Vcenter::VM::PlacementSpec.new()
             placementspec.folder = get_folder(options[:folder])
             placementspec.host = get_host(options[:targethost])
