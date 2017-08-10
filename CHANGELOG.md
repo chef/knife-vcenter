@@ -1,8 +1,9 @@
 # Change Log
 
-## [0.1.1](https://github.com/chef/knife-vcenter/tree/0.1.1) (2017-08-10)
+## [1.0.0](https://github.com/chef/knife-vcenter/tree/1.0.0) (2017-08-10)
 **Merged pull requests:**
 
+- 1.0.0 release [\#3](https://github.com/chef/knife-vcenter/pull/3) ([jjasghar](https://github.com/jjasghar))
 - Walking through the knife-vcenter code [\#2](https://github.com/chef/knife-vcenter/pull/2) ([jjasghar](https://github.com/jjasghar))
 - Useful information for public release. [\#1](https://github.com/chef/knife-vcenter/pull/1) ([jjasghar](https://github.com/jjasghar))
 
