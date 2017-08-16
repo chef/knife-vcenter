@@ -46,7 +46,7 @@ class Chef
             option :vcenter_logs,
                    long:         '--vcenter-logs',
                    description:  'Whether or not to display logs from VCenter SDK. Default: false',
-                   boolean:      true
+                   boolean:      true,
                    default:      false
           end
         end
