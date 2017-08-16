@@ -52,14 +52,14 @@ class Chef
 
           vapi_urls = lookup_service_helper.find_vapi_urls()
           vapi_url = vapi_urls.values[0]
-          Base.log.info(format('Vapi URL: %s', vapi_url))
+          Base.log.info(format('Vapi URL: %s', vapi_url)) if options[:vcenter_logs]
 
           # Create the VAPI config object
           ssl_options = {}
           ssl_options[:verify] = if options[:verify_ssl]
                                    :peer
                                  else
-                                   Base.log.warn('SSL Verification is turned OFF')
+                                   Base.log.warn('SSL Verification is turned OFF') if options[:vcenter_logs]
                                    :none
                                  end
           @vapi_config = VAPI::Bindings::VapiConfig.new(vapi_url, ssl_options)
