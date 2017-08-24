@@ -46,6 +46,11 @@ class Chef
                long:        "--datastore DATASTORE",
                description: "Datastore to be used for the disks etc"
 
+        option :resource_pool,
+               long:        "--resource_pool RESOURCEPOOOL",
+               description: "Resource Pool to create the machine"
+
+
         def validate_params!
           super
 
@@ -64,7 +69,8 @@ class Chef
             type:         "create",
             targethost:   locate_config_value(:targethost),
             folder:       locate_config_value(:folder),
-            datastore:    locate_config_value(:datastore)
+            datastore:    locate_config_value(:datastore),
+            resource_pool: locate_config_value(:resource_pool)
           }
 
           puts @create_options

@@ -121,6 +121,7 @@ class Chef
             placementspec.folder = get_folder(options[:folder])
             placementspec.host = get_host(options[:targethost])
             placementspec.datastore = get_datastore(options[:datastore])
+            placementspec.resource_pool = get_resourcepool(options[:resource_pool])
 
             # Create the CreateSpec object
             createspec = Com::Vmware::Vcenter::VM::CreateSpec.new()
@@ -182,6 +183,13 @@ class Chef
           datastore[0].datastore
         end
 
+        def get_resourcepool(name)
+          filter = Com::Vmware::Vcenter::ResourcePool::FilterSpec.new({names: Set.new([name])})
+          resource_pool_obj = Com::Vmware::Vcenter::ResourcePool.new(vapi_config)
+          resource_pool = resource_pool_obj.list(filter)
+          resource_pool[0].resource_pool
+        end
+
         def get_server(name)
           filter = Com::Vmware::Vcenter::VM::FilterSpec.new({names: Set.new([name])})
           vm_obj = Com::Vmware::Vcenter::VM.new(vapi_config)
@@ -211,6 +219,7 @@ class Chef
           msg_pair('ID', server.vm)
           msg_pair('Name', server.name)
           msg_pair('Power State', server.power_state)
+          msg_pair('Resource Pool', server.resource_pool)
         end
 
 =begin
