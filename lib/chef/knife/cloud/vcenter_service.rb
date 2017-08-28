@@ -219,7 +219,6 @@ class Chef
           msg_pair('ID', server.vm)
           msg_pair('Name', server.name)
           msg_pair('Power State', server.power_state)
-          msg_pair('Resource Pool', server.resource_pool)
         end
 
 =begin
