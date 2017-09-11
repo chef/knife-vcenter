@@ -32,7 +32,7 @@ class Chef
         include VcenterServiceOptions
         include ServerCreateOptions
 
-        banner 'knife vcenter vm clone NAME'
+        banner 'knife vcenter vm clone NAME (options)'
 
         option :template,
                long:        "--template NAME",
@@ -62,7 +62,7 @@ class Chef
             ui.error('You must provide the name of the new machine')
           end
 
-          check_for_missing_config_values!(:template, :targethost, :datacenter)
+          check_for_missing_config_values!(:template, :datacenter)
         end
 
         def before_exec_command

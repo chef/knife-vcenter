@@ -101,6 +101,8 @@ class Chef
             # Update these using the REST API so that they can be passed to the support library
             options[:targethost] = get_host(options[:targethost])
 
+            options[:resource_pool] = get_resource_pool(options[:resource_pool])
+
             # Configure the folder option as a has with the name an the id
             options[:folder] = {
               name: options[:folder],
@@ -170,23 +172,46 @@ class Chef
         end
 
         def get_host(name)
-          filter = Com::Vmware::Vcenter::Host::FilterSpec.new({names: Set.new([name])})
           host_obj = Com::Vmware::Vcenter::Host.new(vapi_config)
-          host = host_obj.list(filter)
+
+          if name.nil?
+            host = host_obj.list
+          else
+            filter = Com::Vmware::Vcenter::Host::FilterSpec.new({names: Set.new([name])})
+            host = host_obj.list(filter)
+          end
+
           host[0].host
         end
 
         def get_datastore(name)
-          filter = Com::Vmware::Vcenter::Datastore::FilterSpec.new({names: Set.new([name])})
           datastore_obj = Com::Vmware::Vcenter::Datastore.new(vapi_config)
-          datastore = datastore_obj.list(filter)
+
+          if name.nil?
+            datastore = datastore_obj.list
+          else
+            filter = Com::Vmware::Vcenter::Datastore::FilterSpec.new({names: Set.new([name])})
+            datastore = datastore_obj.list(filter)
+          end
+
           datastore[0].datastore
         end
 
-        def get_resourcepool(name)
-          filter = Com::Vmware::Vcenter::ResourcePool::FilterSpec.new({names: Set.new([name])})
-          resource_pool_obj = Com::Vmware::Vcenter::ResourcePool.new(vapi_config)
-          resource_pool = resource_pool_obj.list(filter)
+        def get_resource_pool(name)
+          # Create a resource pool object
+          rp_obj = Com::Vmware::Vcenter::ResourcePool.new(vapi_config)
+
+          # If a name has been set then try to find it, otherwise use the first
+          # resource pool that can be found
+          if name.nil?
+            resource_pool = rp_obj.list
+          else
+            # create a filter to find the named resource pool
+            filter = Com::Vmware::Vcenter::ResourcePool::FilterSpec.new(names: Set.new([name]))
+            resource_pool = rp_obj.list(filter)
+            raise format('Unable to find Resource Pool: %s', name) if resource_pool.nil?
+          end
+
           resource_pool[0].resource_pool
         end
 
