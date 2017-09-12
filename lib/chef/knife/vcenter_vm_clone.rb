@@ -55,6 +55,10 @@ class Chef
                long:        "--folder NAME",
                description: "Folder to deploy the new machine into"
 
+        option :pool,
+               long:        "--pool NAME",
+               description: "Name of resource pool to use when creating the machine"
+
         def validate_params!
           super
 
@@ -75,7 +79,8 @@ class Chef
             targethost:   locate_config_value(:targethost),
             datacenter:   locate_config_value(:datacenter),
             poweron:      !locate_config_value(:disable_power_on),
-            folder:       locate_config_value(:folder)
+            folder:       locate_config_value(:folder),
+            resource_pool:locate_config_value(:pool),
           }
 
         end
