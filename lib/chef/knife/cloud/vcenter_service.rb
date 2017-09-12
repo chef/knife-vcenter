@@ -97,6 +97,8 @@ class Chef
           case options[:type]
           when "clone"
 
+            datacenter_exists?(options[:datacenter])
+
             # Some of ht eoptions need to be the ID of the component in VMWAre
             # Update these using the REST API so that they can be passed to the support library
             options[:targethost] = get_host(options[:targethost])
@@ -159,6 +161,14 @@ class Chef
 
         def list_clusters
           Com::Vmware::Vcenter::Cluster.new(vapi_config).list()
+        end
+
+        def datacenter_exists?(name)
+          filter = Com::Vmware::Vcenter::Datacenter::FilterSpec.new(names: Set.new([name]))
+          dc_obj = Com::Vmware::Vcenter::Datacenter.new(vapi_config)
+          dc = dc_obj.list(filter)
+  
+          raise format('Unable to find data center: %s', name) if dc.empty?
         end
 
         def get_folder(name)
