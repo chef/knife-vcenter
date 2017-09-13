@@ -50,7 +50,7 @@ knife[:vcenter_disable_ssl_verify] = true # if you want to disable SSL checking
 or alternatively you can supply them on the command-line:
 
 ```bash
-knife vcenter _command_ --vcenter-username myuser --vcanter-password mypassword
+knife vcenter _command_ --vcenter-username myuser --vcenter-password mypassword
 ```
 
 ## Usage
@@ -124,12 +124,15 @@ _The IP address of the machine is not returned yet as this requires a call to a 
 
 Create a new machine by cloning an existing machine or a template. This machine will be bootstrapped by Chef, as long as all the relevant details are in the `knife.rb` file.
 
-Parameters that are required are:
+The following parameters are required:
 
- - `--targethost` - The host that the virtual machine should be created on
- - `--folder` - Folder that machine should be stored in. This must already exist.
  - `--datacenter` - Datacenter in the vSphere environment that controls the target host
  - `--template` - Name of the virtual machine or template to use
+
+There are some optional parameters that can be specified:
+
+ - `--targethost` - The host that the virtual machine should be created on. If not specified the first host in the cluster is used.
+ - `--folder` - Folder that machine should be stored in. If specified this must already exist.
 
 ```
 $ knife vcenter vm clone example-01 --targethost 172.16.20.3 --folder example --ssh-password P@ssw0rd! --datacenter Datacenter --template ubuntu16-template -N example-01

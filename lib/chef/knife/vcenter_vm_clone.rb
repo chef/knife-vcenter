@@ -32,7 +32,7 @@ class Chef
         include VcenterServiceOptions
         include ServerCreateOptions
 
-        banner 'knife vcenter vm clone NAME'
+        banner 'knife vcenter vm clone NAME (options)'
 
         option :template,
                long:        "--template NAME",
@@ -55,6 +55,14 @@ class Chef
                long:        "--folder NAME",
                description: "Folder to deploy the new machine into"
 
+        option :pool,
+               long:        "--pool NAME",
+               description: "Name of resource pool to use when creating the machine"
+
+        option :node_ssl_verify_mode,
+               :long        => "--node-ssl-verify-mode [peer|none]",
+               :description => "Whether or not to verify the SSL cert for all HTTPS requests."
+
         def validate_params!
           super
 
@@ -62,7 +70,7 @@ class Chef
             ui.error('You must provide the name of the new machine')
           end
 
-          check_for_missing_config_values!(:template, :targethost, :datacenter)
+          check_for_missing_config_values!(:template, :datacenter)
         end
 
         def before_exec_command
@@ -75,9 +83,9 @@ class Chef
             targethost:   locate_config_value(:targethost),
             datacenter:   locate_config_value(:datacenter),
             poweron:      !locate_config_value(:disable_power_on),
-            folder:       locate_config_value(:folder)
+            folder:       locate_config_value(:folder),
+            resource_pool: locate_config_value(:pool),
           }
-
         end
 
         def before_bootstrap
