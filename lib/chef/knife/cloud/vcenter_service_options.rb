@@ -21,7 +21,7 @@ class Chef
   class Knife
     class Cloud
       # rubocop:disable Style/AlignParameters
-      # runodop:disable Metrics/BlockLength
+      # rubocop:disable Metrics/BlockLength
       module VcenterServiceOptions
         def self.included(includer)
           includer.class_eval do

@@ -59,6 +59,10 @@ class Chef
                long:        "--pool NAME",
                description: "Name of resource pool to use when creating the machine"
 
+        option :node_ssl_verify_mode,
+               :long        => "--node-ssl-verify-mode [peer|none]",
+               :description => "Whether or not to verify the SSL cert for all HTTPS requests."
+
         def validate_params!
           super
 
@@ -80,9 +84,8 @@ class Chef
             datacenter:   locate_config_value(:datacenter),
             poweron:      !locate_config_value(:disable_power_on),
             folder:       locate_config_value(:folder),
-            resource_pool:locate_config_value(:pool),
+            resource_pool: locate_config_value(:pool),
           }
-
         end
 
         def before_bootstrap
