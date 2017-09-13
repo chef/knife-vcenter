@@ -1,8 +1,16 @@
 # Change Log
 
-## [1.0.0](https://github.com/chef/knife-vcenter/tree/1.0.0) (2017-08-10)
+## [1.1.0](https://github.com/chef/knife-vcenter/tree/1.1.0) (2017-09-13)
+[Full Changelog](https://github.com/chef/knife-vcenter/compare/v1.0.0...1.1.0)
+
 **Merged pull requests:**
 
+- Updated to make resource\_pool and targethost optional [\#6](https://github.com/chef/knife-vcenter/pull/6) ([russellseymour](https://github.com/russellseymour))
+
+## [v1.0.0](https://github.com/chef/knife-vcenter/tree/v1.0.0) (2017-08-28)
+**Merged pull requests:**
+
+- Added new option to state wether vCenter SDK logs should be displayed [\#4](https://github.com/chef/knife-vcenter/pull/4) ([russellseymour](https://github.com/russellseymour))
 - 1.0.0 release [\#3](https://github.com/chef/knife-vcenter/pull/3) ([jjasghar](https://github.com/jjasghar))
 - Walking through the knife-vcenter code [\#2](https://github.com/chef/knife-vcenter/pull/2) ([jjasghar](https://github.com/jjasghar))
 - Useful information for public release. [\#1](https://github.com/chef/knife-vcenter/pull/1) ([jjasghar](https://github.com/jjasghar))
