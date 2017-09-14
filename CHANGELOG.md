@@ -1,7 +1,14 @@
 # Change Log
 
-## [1.1.0](https://github.com/chef/knife-vcenter/tree/1.1.0) (2017-09-13)
-[Full Changelog](https://github.com/chef/knife-vcenter/compare/v1.0.0...1.1.0)
+## [1.1.1](https://github.com/chef/knife-vcenter/tree/1.1.1) (2017-09-14)
+[Full Changelog](https://github.com/chef/knife-vcenter/compare/v1.1.0...1.1.1)
+
+**Merged pull requests:**
+
+- 6.6 vSphere sdk release [\#7](https://github.com/chef/knife-vcenter/pull/7) ([jjasghar](https://github.com/jjasghar))
+
+## [v1.1.0](https://github.com/chef/knife-vcenter/tree/v1.1.0) (2017-09-13)
+[Full Changelog](https://github.com/chef/knife-vcenter/compare/v1.0.0...v1.1.0)
 
 **Merged pull requests:**
 
