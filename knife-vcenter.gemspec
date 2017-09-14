@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rb-readline', '~> 0.5'
   spec.add_dependency 'rbvmomi', '~> 1.11'
   spec.add_dependency 'savon', '~> 2.11'
-  spec.add_dependency 'vsphere-automation-sdk', '~> 2.5'
+  spec.add_dependency 'vsphere-automation-sdk', '~> 6.6'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'debase'
