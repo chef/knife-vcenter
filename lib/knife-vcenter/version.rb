@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+# Provisions machines in vCenter
 module KnifeVcenter
+  # The version of this amazing Gem, you should <3 it.
   VERSION = '2.0.0'.freeze
 end

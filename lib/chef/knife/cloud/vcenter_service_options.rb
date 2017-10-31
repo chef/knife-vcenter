@@ -23,6 +23,9 @@ class Chef
       # rubocop:disable Style/AlignParameters
       # rubocop:disable Metrics/BlockLength
       module VcenterServiceOptions
+        # The main service options for this plugin
+        #
+        # @param [Object] includer are the options that can be handed off to this method
         def self.included(includer)
           includer.class_eval do
             option :vcenter_username,

@@ -36,8 +36,11 @@ require 'set'
 require 'support/clone_vm'
 
 class Chef
+  # The main knife class
   class Knife
+    # The main cloud class from knife-cloud
     class Cloud
+      # Extends the Service method, this is the bulk of the integration
       class VcenterService < Service
         include VcenterServiceHelpers
 
@@ -88,6 +91,9 @@ class Chef
           }
         end
 
+        # Creates the server
+        #
+        # @param [Object] options to override anything you need to do
         def create_server(options={})
 
           # Create the vm object
@@ -99,7 +105,7 @@ class Chef
 
             datacenter_exists?(options[:datacenter])
 
-            # Some of ht eoptions need to be the ID of the component in VMWAre
+            # Some of ht eoptions need to be the ID of the component in VMware
             # Update these using the REST API so that they can be passed to the support library
             options[:targethost] = get_host(options[:targethost])
 
@@ -145,32 +151,44 @@ class Chef
           end
         end
 
+        # Get a list of vms from the API
+        #
         def list_servers
-          # get a list of vms from the API
           Com::Vmware::Vcenter::VM.new(vapi_config).list()
         end
 
+        # Return a list of the hosts in the vCenter
+        #
         def list_hosts
-          # return a list of the hosts in the vcenter
           Com::Vmware::Vcenter::Host.new(vapi_config).list()
         end
 
+        # Return a list of the datacenters in the vCenter
+        #
         def list_datacenters
           Com::Vmware::Vcenter::Datacenter.new(vapi_config).list()
         end
 
+        # Return a list of the clusters in the vCenter
+        #
         def list_clusters
           Com::Vmware::Vcenter::Cluster.new(vapi_config).list()
         end
 
+        # Checks to see if the datacenter exists in the vCenter
+        #
+        # @param [String] name is the name of the datacenter
         def datacenter_exists?(name)
           filter = Com::Vmware::Vcenter::Datacenter::FilterSpec.new(names: Set.new([name]))
           dc_obj = Com::Vmware::Vcenter::Datacenter.new(vapi_config)
           dc = dc_obj.list(filter)
-  
+
           raise format('Unable to find data center: %s', name) if dc.empty?
         end
 
+        # Gets the folder
+        #
+        # @param [String] name is the folder of the datacenter
         def get_folder(name)
           # Create a filter to ensure that only the named folder is returned
           filter = Com::Vmware::Vcenter::Folder::FilterSpec.new({names: Set.new([name])})
@@ -181,6 +199,9 @@ class Chef
           folder[0].folder
         end
 
+        # Gets the host
+        #
+        # @param [String] name is the host of the datacenter
         def get_host(name)
           host_obj = Com::Vmware::Vcenter::Host.new(vapi_config)
 
@@ -194,6 +215,9 @@ class Chef
           host[0].host
         end
 
+        # Gets the datastore
+        #
+        # @param [String] name is the datastore of the datacenter
         def get_datastore(name)
           datastore_obj = Com::Vmware::Vcenter::Datastore.new(vapi_config)
 
@@ -207,6 +231,9 @@ class Chef
           datastore[0].datastore
         end
 
+        # Gets the resource_pool
+        #
+        # @param [String] name is the resource_pool of the datacenter
         def get_resource_pool(name)
           # Create a resource pool object
           rp_obj = Com::Vmware::Vcenter::ResourcePool.new(vapi_config)
@@ -225,12 +252,18 @@ class Chef
           resource_pool[0].resource_pool
         end
 
+        # Gets the server
+        #
+        # @param [String] name is the server of the datacenter
         def get_server(name)
           filter = Com::Vmware::Vcenter::VM::FilterSpec.new({names: Set.new([name])})
           vm_obj = Com::Vmware::Vcenter::VM.new(vapi_config)
           vm_obj.list(filter)[0]
         end
 
+        # Deletes the VM
+        #
+        # @param [String] name is the server to delete
         def delete_vm(name)
           vm = get_server(name)
           server_summary(vm)
@@ -250,6 +283,9 @@ class Chef
           vm_obj.delete(vm.vm)
         end
 
+        # Gets some server information
+        #
+        # @param [Object] server is the server object
         def server_summary(server, _coloumns_with_inf=nil)
           msg_pair('ID', server.vm)
           msg_pair('Name', server.name)

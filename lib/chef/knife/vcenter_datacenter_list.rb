@@ -24,14 +24,19 @@ require 'chef/knife/cloud/vcenter_service_helpers'
 require 'chef/knife/cloud/vcenter_service_options'
 
 class Chef
+  # The main knife class
   class Knife
+    # The main cloud class from knife-cloud
     class Cloud
+      # Extends the ResourceListCommand for specific vCenter
       class VcenterDatacenterList < ResourceListCommand
         include VcenterServiceHelpers
         include VcenterServiceOptions
 
         banner 'knife vcenter datacenter list'
 
+        # Sets up the columns for listing out and sorts by name
+        #
         def before_exec_command
           @columns_with_info = [
             { label: 'ID',    key: 'datacenter' },
@@ -41,10 +46,11 @@ class Chef
           @sort_by_field = 'name'
         end
 
+        # Call service to get the list of hosts from vcenter
+        #
         def query_resource
-          # Call service to get the list of hosts from vcenter
           service.list_datacenters
-        end        
+        end
       end
     end
   end

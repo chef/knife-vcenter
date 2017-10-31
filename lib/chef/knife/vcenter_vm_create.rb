@@ -25,8 +25,11 @@ require 'chef/knife/cloud/vcenter_service_helpers'
 require 'chef/knife/cloud/vcenter_service_options'
 
 class Chef
+  # The main knife class
   class Knife
+    # The main cloud class from knife-cloud
     class Cloud
+      # Extends the ServerCreateCommand for specific vCenter
       class VcenterVmCreate < Chef::Knife::Cloud::ServerCreateCommand
         include VcenterServiceHelpers
         include VcenterServiceOptions
@@ -51,6 +54,8 @@ class Chef
                description: "Resource Pool to create the machine"
 
 
+        # Validates the parameters, you need that unique name person!
+        #
         def validate_params!
           super
 
@@ -61,6 +66,8 @@ class Chef
           check_for_missing_config_values!(:targethost, :datastore, :folder)
         end
 
+        # Sets up the create options and puts them
+        #
         def before_exec_command
           super
 
@@ -75,7 +82,6 @@ class Chef
 
           puts @create_options
         end
-
       end
     end
   end
