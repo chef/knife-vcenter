@@ -19,13 +19,18 @@
 
 require 'logger'
 
+# Base module for vcenter knife commands
 module Base
   attr_accessor :log
 
+  # Creates the @log variable
+  #
   def self.log
     @log ||= init_logger
   end
 
+  # Set the logger level by default
+  #
   def self.init_logger
     log = Logger.new(STDOUT)
     log.progname = 'Knife VCenter'

@@ -26,12 +26,15 @@ require 'chef/knife/cloud/vcenter_service_options'
 class Chef
   class Knife
     class Cloud
+      # Extends ResourceListcommand to talk to vCenter
       class VcenterClusterList < ResourceListCommand
         include VcenterServiceHelpers
         include VcenterServiceOptions
 
         banner 'knife vcenter cluster list'
 
+        # Creates the columns and how to sort the columns
+        #
         def before_exec_command
           @columns_with_info = [
             { label: 'ID',    key: 'cluster' },
@@ -43,11 +46,14 @@ class Chef
           @sort_by_field = 'name'
         end
 
+        # Call service to get the list of hosts from vcenter
+        #
         def query_resource
-          # Call service to get the list of hosts from vcenter
           service.list_clusters
         end
 
+        # How to set the color of the text
+        #
         def format_boolean(status)
           status_color = status ? :green : :red
           ui.color(status ? "True" : "False", status_color)

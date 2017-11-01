@@ -24,14 +24,19 @@ require 'chef/knife/cloud/vcenter_service_helpers'
 require 'chef/knife/cloud/vcenter_service_options'
 
 class Chef
+  # Main knife class
   class Knife
+    # the main cloud class from knife-cloud
     class Cloud
+      # Extends the ResourceListcommand for specific vCenter
       class VcenterHostList < ResourceListCommand
         include VcenterServiceHelpers
         include VcenterServiceOptions
 
         banner 'knife vcenter host list'
 
+        # Sets up the columns for listing out and sorts by name
+        #
         def before_exec_command
           @columns_with_info = [
             { label: 'ID',    key: 'host' },
@@ -43,11 +48,15 @@ class Chef
           @sort_by_field = 'name'
         end
 
+        # Call service to get the list of hosts from vCenter
+        #
         def query_resource
-          # Call service to get the list of hosts from vcenter
           service.list_hosts
         end
 
+        # Formats the power status
+        #
+        # @param [Object] status takes the number and formats it how you need it to
         def format_power_status(status)
           status_check = status.value
           status_color = case status_check

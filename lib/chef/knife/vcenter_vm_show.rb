@@ -27,6 +27,7 @@ require 'chef/knife/cloud/vcenter_service_options'
 class Chef
   class Knife
     class Cloud
+      # Extends the SeverShowCommand to do specific things for vCenter
       class VcenterVmShow < ServerShowCommand
         include ServerShowOptions
         include VcenterServiceOptions

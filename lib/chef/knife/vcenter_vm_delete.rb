@@ -27,6 +27,7 @@ require 'chef/knife/cloud/vcenter_service_options'
 class Chef
   class Knife
     class Cloud
+      # Extends the SeverDeleteCommand for specifically vCenter
       class VcenterVmDelete < ServerDeleteCommand
         include ServerDeleteOptions
         include VcenterServiceOptions
@@ -35,6 +36,8 @@ class Chef
         banner 'knife vcenter vm delete NAME [NAME] (options)'
 
         # rubocop:disable Style/GuardClause
+        # Validates the parameters to make sure we're good.
+        #
         def validate_params!
           if @name_args.empty?
             ui.error('You must supply the name of the virtual machine to delete.')
@@ -42,6 +45,8 @@ class Chef
           end
         end
 
+        # Executes the command against vCenter and the Chef Server
+        #
         def execute_command
           @name_args.each do |name|
             service.delete_vm(name)

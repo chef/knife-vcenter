@@ -20,11 +20,16 @@
 require 'chef/knife/cloud/helpers'
 
 class Chef
+  # The main knife class
   class Knife
+    # The main cloud class from knife-cloud
     class Cloud
+      # Module that creates the helpers for this gem
       module VcenterServiceHelpers
         include Chef::Knife::Cloud::Helpers
 
+        # Creates the object for vCenterService
+        #
         def create_service_instance
           Chef::Knife::Cloud::VcenterService.new(username: locate_config_value(:vcenter_username),
                                                  password: locate_config_value(:vcenter_password),
@@ -32,15 +37,22 @@ class Chef
                                                  verify_ssl: verify_ssl?)
         end
 
+        # Do we have valid SSL?
+        #
         def verify_ssl?
           !locate_config_value(:vcenter_disable_ssl_verify)
         end
 
+        # Validate the options and fail out if something isn't there
+        #
         def validate!
           check_for_missing_config_values!(:vcenter_username, :vcenter_password, :vcenter_host)
         end
 
         # rubocop:disable Style/GuardClause
+        # Checks for any missing values
+        #
+        # @param [Object] keys makes sure that the values are all not nil
         def check_for_missing_config_values!(*keys)
           missing = keys.select { |x| locate_config_value(x).nil? }
 

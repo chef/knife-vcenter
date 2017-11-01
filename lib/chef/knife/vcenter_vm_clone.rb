@@ -25,8 +25,11 @@ require 'chef/knife/cloud/vcenter_service_helpers'
 require 'chef/knife/cloud/vcenter_service_options'
 
 class Chef
+  # The main knife class
   class Knife
+    # The main cloud class from knife-cloud
     class Cloud
+      # Extends the ServerCreateCommand for specific vCenter
       class VcenterVmClone < Chef::Knife::Cloud::ServerCreateCommand
         include VcenterServiceHelpers
         include VcenterServiceOptions
@@ -63,6 +66,8 @@ class Chef
                :long        => "--node-ssl-verify-mode [peer|none]",
                :description => "Whether or not to verify the SSL cert for all HTTPS requests."
 
+        # Validates the parameters and maksessure you have a template, name, or datacenter
+        #
         def validate_params!
           super
 
@@ -73,6 +78,8 @@ class Chef
           check_for_missing_config_values!(:template, :datacenter)
         end
 
+        # Creates the @create_options to hand off to the next step
+        #
         def before_exec_command
           super
 
@@ -88,15 +95,19 @@ class Chef
           }
         end
 
+        # determine the IP address to use to bootstrap the machine with chef
+        #
         def before_bootstrap
           super
 
           config[:chef_node_name] = locate_config_value(:chef_node_name) ? locate_config_value(:chef_node_name) : server.name
 
-          # determine the IP address to use to bootstrap the machine with chef
+
           config[:bootstrap_ip_address] = hostname_for_server
         end
 
+        # Gets the ipaddress for the VM to bootstrap with
+        #
         def hostname_for_server
           ipaddress = service.ipaddress
 

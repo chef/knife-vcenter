@@ -25,14 +25,19 @@ require 'chef/knife/cloud/vcenter_service_helpers'
 require 'chef/knife/cloud/vcenter_service_options'
 
 class Chef
+  # The main knife class
   class Knife
+    # The main cloud class from knife-cloud
     class Cloud
+      # Extends the ServerListCommand for specific vCenter
       class VcenterVmList < Chef::Knife::Cloud::ServerListCommand
         include VcenterServiceHelpers
         include VcenterServiceOptions
 
         banner 'knife vcenter vm list'
 
+        # Sets up the columns for listing out and sorts by name
+        #
         def before_exec_command
           @columns_with_info = [
             { label: 'ID',    key: 'vm' },
@@ -45,6 +50,8 @@ class Chef
           @sort_by_field = 'name'
         end
 
+        # Sets the color for the different status of the machines
+        #
         def format_power_status(status)
           status_check = status.value
           status_color = case status_check
@@ -59,6 +66,9 @@ class Chef
           ui.color(status.value, status_color)
         end
 
+        # Formats the memory value
+        #
+        # @param [Object] value takes the number and formats it how you need it to
         def format_memory_value(value)
           value.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse
         end

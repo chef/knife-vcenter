@@ -13,13 +13,11 @@ class LookupServiceHelper
     attr_reader :serviceRegistration
 
     # Constructs a new instance.
-    # @param sample [SampleBase] the associated sample, which provides access
-    #     to the configuration properties of the sample
+    # @param [Object] host the associated sample, which provides access
+    # to the configuration properties of the sample
     def initialize(host)
-      
         @soap_url = format("https://%s/lookupservice/sdk", host)
         @wsdl_url = format("https://%s/lookupservice/wsdl/lookup.wsdl", host)
-
     end
 
     # Connects to the lookup service.
