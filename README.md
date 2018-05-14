@@ -62,7 +62,7 @@ knife vcenter _command_ --vcenter-username myuser --vcenter-password mypassword
 
 ### vCenter Permissions
 
-You need the following permissions (at minimum) on your user to be able to use `knife-vsphere`.
+You need the following permissions (at minimum) on your user to be able to use `knife-vcenter`.
 
 * Datastore
     * Allocate space :ballot_box_with_check:
