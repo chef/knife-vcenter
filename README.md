@@ -60,6 +60,26 @@ or alternatively you can supply them on the command-line:
 knife vcenter _command_ --vcenter-username myuser --vcenter-password mypassword
 ```
 
+### vCenter Permissions
+
+You need the following permissions (at minimum) on your user to be able to use `knife-vsphere`.
+
+* Datastore
+    * Allocate space :ballot_box_with_check:
+    * Browse datastore :ballot_box_with_check:
+* Host
+    * Local Operations
+         * Create virtual machine :ballot_box_with_check:
+         * Delete virtual machine :ballot_box_with_check:
+         * Manage user groups :ballot_box_with_check:
+         * Reconfigure virtual machine :ballot_box_with_check:
+ * Network
+    * Assign Network :ballot_box_with_check:
+ * Resource
+    * Assign virtual machine to resource pool :ballot_box_with_check:
+ * Virtual Machine :ballot_box_with_check:
+
+
 ## Usage
 
 ### knife vcenter cluster list
