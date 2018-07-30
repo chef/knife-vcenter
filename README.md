@@ -2,7 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/knife-vcenter.svg)](https://rubygems.org/gems/knife-vcenter)
 [![Build Status](https://travis-ci.org/chef/knife-vcenter.svg?branch=master)](https://travis-ci.org/chef/knife-vcenter)
-[![Dependency Status](https://gemnasium.com/chef/knife-vcenter.svg)](https://gemnasium.com/chef/knife-vcenter)
 [![Inline docs](http://inch-ci.org/github/chef/knife-vcenter.svg?branch=master)](http://inch-ci.org/github/chef/knife-vcenter)
 
 This is the official Chef Knife plugin for VMware REST API. This plugin gives knife the ability to create, bootstrap, and manage VMware vms.
