@@ -17,11 +17,11 @@
 # limitations under the License.
 #
 
-require 'chef/knife'
-require 'chef/knife/cloud/list_resource_command'
-require 'chef/knife/cloud/vcenter_service'
-require 'chef/knife/cloud/vcenter_service_helpers'
-require 'chef/knife/cloud/vcenter_service_options'
+require "chef/knife"
+require "chef/knife/cloud/list_resource_command"
+require "chef/knife/cloud/vcenter_service"
+require "chef/knife/cloud/vcenter_service_helpers"
+require "chef/knife/cloud/vcenter_service_options"
 
 class Chef
   # Main knife class
@@ -33,19 +33,19 @@ class Chef
         include VcenterServiceHelpers
         include VcenterServiceOptions
 
-        banner 'knife vcenter host list'
+        banner "knife vcenter host list"
 
         # Sets up the columns for listing out and sorts by name
         #
         def before_exec_command
           @columns_with_info = [
-            { label: 'ID',    key: 'host' },
-            { label: 'Name',  key: 'name' },
-            { label: 'Power State', key: 'power_state', value_callback: method(:format_power_status) },
-            { label: 'Connection State', key: 'connection_state'},
+            { label: "ID",    key: "host" },
+            { label: "Name",  key: "name" },
+            { label: "Power State", key: "power_state", value_callback: method(:format_power_status) },
+            { label: "Connection State", key: "connection_state" }
           ]
 
-          @sort_by_field = 'name'
+          @sort_by_field = "name"
         end
 
         # Call service to get the list of hosts from vCenter
@@ -60,12 +60,12 @@ class Chef
         def format_power_status(status)
           status_check = status.value
           status_color = case status_check
-                          when 'POWERED_OFF'
-                            :red
-                          when 'POWERED_ON'
-                            :green
-                          when 'SUSPENDED'
-                            :yellow
+                         when "POWERED_OFF"
+                           :red
+                         when "POWERED_ON"
+                           :green
+                         when "SUSPENDED"
+                           :yellow
                           end
 
           ui.color(status.value, status_color)

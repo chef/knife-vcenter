@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-require 'chef/knife/cloud/helpers'
+require "chef/knife/cloud/helpers"
 
 class Chef
   # The main knife class
@@ -57,7 +57,7 @@ class Chef
           missing = keys.select { |x| locate_config_value(x).nil? }
 
           unless missing.empty?
-            ui.error(format("The following required parameters are missing: %s", missing.join(', ')))
+            ui.error(format("The following required parameters are missing: %s", missing.join(", ")))
             exit(1)
           end
         end

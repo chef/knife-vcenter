@@ -1,18 +1,21 @@
-AllCops:
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyleAlignWith, AutoCorrect, Severity.
+# SupportedStylesAlignWith: keyword, variable, start_of_line
+Layout/EndAlignment:
   Exclude:
-    - 'spec/**/*'
-    - 'vendor/**/*'
-vendor/AbcSize:
-  Max: 30
-Metrics/LineLength:
-  Max: 150
-Metrics/MethodLength:
-  Max: 30
-Style/Documentation:
-  Enabled: false
-Style/SignalException:
-  Enabled: false
-Style/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: no_space
-Style/SpaceInsideBrackets:
-  Enabled: false
+    - 'lib/chef/knife/vcenter_host_list.rb'
+    - 'lib/chef/knife/vcenter_vm_list.rb'
+
+# Offense count: 17
+Lint/UselessAssignment:
+  Exclude:
+    - 'lib/chef/knife/cloud/vcenter_service.rb'
+    - 'lib/lookup_service_helper.rb'
+
+# Offense count: 1
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: snake_case, camelCase
+Naming/VariableName:
+  Exclude:
+    - 'lib/lookup_service_helper.rb'

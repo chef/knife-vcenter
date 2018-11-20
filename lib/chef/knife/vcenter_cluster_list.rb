@@ -17,11 +17,11 @@
 # limitations under the License.
 #
 
-require 'chef/knife'
-require 'chef/knife/cloud/list_resource_command'
-require 'chef/knife/cloud/vcenter_service'
-require 'chef/knife/cloud/vcenter_service_helpers'
-require 'chef/knife/cloud/vcenter_service_options'
+require "chef/knife"
+require "chef/knife/cloud/list_resource_command"
+require "chef/knife/cloud/vcenter_service"
+require "chef/knife/cloud/vcenter_service_helpers"
+require "chef/knife/cloud/vcenter_service_options"
 
 class Chef
   class Knife
@@ -31,19 +31,19 @@ class Chef
         include VcenterServiceHelpers
         include VcenterServiceOptions
 
-        banner 'knife vcenter cluster list'
+        banner "knife vcenter cluster list"
 
         # Creates the columns and how to sort the columns
         #
         def before_exec_command
           @columns_with_info = [
-            { label: 'ID',    key: 'cluster' },
-            { label: 'Name',  key: 'name' },
-            { label: 'DRS?', key: 'drs_enabled', value_callback: method(:format_boolean) },
-            { label: 'HA?', key: 'ha_enabled', value_callback: method(:format_boolean)},
+            { label: "ID",    key: "cluster" },
+            { label: "Name",  key: "name" },
+            { label: "DRS?", key: "drs_enabled", value_callback: method(:format_boolean) },
+            { label: "HA?", key: "ha_enabled", value_callback: method(:format_boolean) }
           ]
 
-          @sort_by_field = 'name'
+          @sort_by_field = "name"
         end
 
         # Call service to get the list of hosts from vcenter

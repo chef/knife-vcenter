@@ -17,12 +17,12 @@
 # limitations under the License.
 #
 
-require 'chef/knife'
-require 'chef/knife/cloud/server/create_command'
-require 'chef/knife/cloud/server/create_options'
-require 'chef/knife/cloud/vcenter_service'
-require 'chef/knife/cloud/vcenter_service_helpers'
-require 'chef/knife/cloud/vcenter_service_options'
+require "chef/knife"
+require "chef/knife/cloud/server/create_command"
+require "chef/knife/cloud/server/create_options"
+require "chef/knife/cloud/vcenter_service"
+require "chef/knife/cloud/vcenter_service_helpers"
+require "chef/knife/cloud/vcenter_service_options"
 
 class Chef
   # The main knife class
@@ -35,24 +35,23 @@ class Chef
         include VcenterServiceOptions
         include ServerCreateOptions
 
-        banner 'knife vcenter vm create NAME'
+        banner "knife vcenter vm create NAME"
 
         option :targethost,
-               long:        "--targethost HOST",
+               long: "--targethost HOST",
                description: "vCenter host on which the new VM should be created"
 
         option :folder,
-               long:        "--folder FOLDER",
+               long: "--folder FOLDER",
                description: "Folder in which the machine will reside"
 
         option :datastore,
-               long:        "--datastore DATASTORE",
+               long: "--datastore DATASTORE",
                description: "Datastore to be used for the disks etc"
 
         option :resource_pool,
-               long:        "--resource_pool RESOURCEPOOOL",
+               long: "--resource_pool RESOURCEPOOOL",
                description: "Resource Pool to create the machine"
-
 
         # Validates the parameters, you need that unique name person!
         #
@@ -60,7 +59,7 @@ class Chef
           super
 
           if @name_args.empty?
-            ui.error('You must provide the name of the new machine')
+            ui.error("You must provide the name of the new machine")
           end
 
           check_for_missing_config_values!(:targethost, :datastore, :folder)
@@ -72,12 +71,12 @@ class Chef
           super
 
           @create_options = {
-            name:         @name_args[0],
-            type:         "create",
-            targethost:   locate_config_value(:targethost),
-            folder:       locate_config_value(:folder),
-            datastore:    locate_config_value(:datastore),
-            resource_pool: locate_config_value(:resource_pool)
+            name: @name_args[0],
+            type: "create",
+            targethost: locate_config_value(:targethost),
+            folder: locate_config_value(:folder),
+            datastore: locate_config_value(:datastore),
+            resource_pool: locate_config_value(:resource_pool),
           }
 
           puts @create_options

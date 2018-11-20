@@ -17,11 +17,11 @@
 # limitations under the License.
 #
 
-require 'chef/knife'
-require 'chef/knife/cloud/list_resource_command'
-require 'chef/knife/cloud/vcenter_service'
-require 'chef/knife/cloud/vcenter_service_helpers'
-require 'chef/knife/cloud/vcenter_service_options'
+require "chef/knife"
+require "chef/knife/cloud/list_resource_command"
+require "chef/knife/cloud/vcenter_service"
+require "chef/knife/cloud/vcenter_service_helpers"
+require "chef/knife/cloud/vcenter_service_options"
 
 class Chef
   # The main knife class
@@ -33,17 +33,17 @@ class Chef
         include VcenterServiceHelpers
         include VcenterServiceOptions
 
-        banner 'knife vcenter datacenter list'
+        banner "knife vcenter datacenter list"
 
         # Sets up the columns for listing out and sorts by name
         #
         def before_exec_command
           @columns_with_info = [
-            { label: 'ID',    key: 'datacenter' },
-            { label: 'Name',  key: 'name' },
+            { label: "ID",    key: "datacenter" },
+            { label: "Name",  key: "name" }
           ]
 
-          @sort_by_field = 'name'
+          @sort_by_field = "name"
         end
 
         # Call service to get the list of hosts from vcenter
