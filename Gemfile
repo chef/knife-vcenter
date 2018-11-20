@@ -11,6 +11,7 @@ end
 group :test do
   gem "chefstyle", "= 0.10.0"
   gem "rake"
+  gem "vsphere-automation-sdk", git: "https://github.com/vmware/vsphere-automation-sdk-ruby.git", branch: "master"
 end
 instance_eval(ENV["GEMFILE_MOD"]) if ENV["GEMFILE_MOD"]
 
