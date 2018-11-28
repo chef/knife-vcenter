@@ -15,8 +15,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/chef/knife-vcenter"
   spec.license       = "Apache-2.0"
 
-  spec.files         = `git ls-files -z`.split("\x0")
-  spec.test_files    = spec.files.grep(%r{^spec/})
+  spec.files         = Dir["LICENSE", "lib/**/*"]
+  spec.test_files    = Dir["spec/**/*"]
   spec.require_paths = ["lib"]
 
   spec.add_dependency "knife-cloud", "~> 1.2"
