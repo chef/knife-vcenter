@@ -13,10 +13,10 @@ Gem::Specification.new do |spec|
   spec.summary       = "Knife plugin to VMware vCenter."
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/chef/knife-vcenter"
-  spec.license       = "Apache 2.0"
+  spec.license       = "Apache-2.0"
 
   spec.files         = `git ls-files -z`.split("\x0")
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.test_files    = spec.files.grep(%r{^spec/})
   spec.require_paths = ["lib"]
 
   spec.add_dependency "knife-cloud", "~> 1.2"
