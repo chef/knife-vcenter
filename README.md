@@ -219,7 +219,7 @@ Author:: Russell Seymour ([rseymour@chef.io](mailto:rseymour@chef.io))
 
 Author:: JJ Asghar ([jj@chef.io](mailto:jj@chef.io))
 
-Copyright:: Copyright (c) 2017 Chef Software, Inc.
+Copyright:: Copyright (c) 2017-2018 Chef Software, Inc.
 
 License:: Apache License, Version 2.0
 
