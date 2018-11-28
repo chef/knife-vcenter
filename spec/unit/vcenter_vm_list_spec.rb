@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 #
 # Author:: Chef Partner Engineering (<partnereng@chef.io>)
-# Copyright:: Copyright (c) 2017 Chef Software, Inc.
+# Copyright:: Copyright (c) 2017-2018 Chef Software, Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,9 +58,8 @@ describe Chef::Knife::Cloud::VcenterVmList do
 
   describe "#format_memory_value" do
     context "when the memory value is 8192" do
-      it "displays as 8,192" do
-        expect(subject.ui).to receive(:text).with("8,192")
-        subject.format_memory_value(8192)
+      it "returns 8,192" do
+        expect(subject.format_memory_value(8192)).to eq("8,192")
       end
     end
   end
