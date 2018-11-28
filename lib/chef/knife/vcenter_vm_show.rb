@@ -17,12 +17,12 @@
 # limitations under the License.
 #
 
-require 'chef/knife'
-require 'chef/knife/cloud/server/show_options'
-require 'chef/knife/cloud/server/show_command'
-require 'chef/knife/cloud/vcenter_service'
-require 'chef/knife/cloud/vcenter_service_helpers'
-require 'chef/knife/cloud/vcenter_service_options'
+require "chef/knife"
+require "chef/knife/cloud/server/show_options"
+require "chef/knife/cloud/server/show_command"
+require "chef/knife/cloud/vcenter_service"
+require "chef/knife/cloud/vcenter_service_helpers"
+require "chef/knife/cloud/vcenter_service_options"
 
 class Chef
   class Knife
@@ -33,17 +33,15 @@ class Chef
         include VcenterServiceOptions
         include VcenterServiceHelpers
 
-        banner 'knife vcenter vm show NAME (options)'
-
-        # rubocop:disable Style/GuardClause
+        banner "knife vcenter vm show NAME (options)"
         def validate_params!
           if @name_args.empty?
-            ui.error('You must supply the name of the virtual machine to display.')
+            ui.error("You must supply the name of the virtual machine to display.")
             exit(1) if @name_args.empty?
           end
 
           if @name_args.size > 1
-            ui.error('You may only supply one virtual machine name')
+            ui.error("You may only supply one virtual machine name")
             exit 1
           end
 

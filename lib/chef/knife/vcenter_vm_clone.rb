@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # Author:: Chef Partner Engineering (<partnereng@chef.io>)
 # Copyright:: Copyright (c) 2017 Chef Software, Inc.
@@ -17,12 +18,12 @@
 # limitations under the License.
 #
 
-require 'chef/knife'
-require 'chef/knife/cloud/server/create_command'
-require 'chef/knife/cloud/server/create_options'
-require 'chef/knife/cloud/vcenter_service'
-require 'chef/knife/cloud/vcenter_service_helpers'
-require 'chef/knife/cloud/vcenter_service_options'
+require "chef/knife"
+require "chef/knife/cloud/server/create_command"
+require "chef/knife/cloud/server/create_options"
+require "chef/knife/cloud/vcenter_service"
+require "chef/knife/cloud/vcenter_service_helpers"
+require "chef/knife/cloud/vcenter_service_options"
 
 class Chef
   # The main knife class
@@ -35,36 +36,36 @@ class Chef
         include VcenterServiceOptions
         include ServerCreateOptions
 
-        banner 'knife vcenter vm clone NAME (options)'
+        banner "knife vcenter vm clone NAME (options)"
 
         option :template,
-               long:        "--template NAME",
+               long: "--template NAME",
                description: "Name of VM or template to use to clone machine from"
 
         option :targethost,
-               long:        "--targethost HOST",
+               long: "--targethost HOST",
                description: "Host that the machine should be created on"
 
         option :datacenter,
-               long:        "--datacenter NAME",
+               long: "--datacenter NAME",
                description: "The datacenter for vSphere"
 
         option :disable_power_on,
-               long:        "--disable-power-on",
-               boolean:     true,
-               default:     false
+               long: "--disable-power-on",
+               boolean: true,
+               default: false
 
         option :folder,
-               long:        "--folder NAME",
+               long: "--folder NAME",
                description: "Folder to deploy the new machine into"
 
         option :pool,
-               long:        "--pool NAME",
+               long: "--pool NAME",
                description: "Name of resource pool to use when creating the machine"
 
         option :node_ssl_verify_mode,
-               :long        => "--node-ssl-verify-mode [peer|none]",
-               :description => "Whether or not to verify the SSL cert for all HTTPS requests."
+               long: "--node-ssl-verify-mode [peer|none]",
+               description: "Whether or not to verify the SSL cert for all HTTPS requests."
 
         # Validates the parameters and maksessure you have a template, name, or datacenter
         #
@@ -72,7 +73,7 @@ class Chef
           super
 
           if @name_args.empty?
-            ui.error('You must provide the name of the new machine')
+            ui.error("You must provide the name of the new machine")
           end
 
           check_for_missing_config_values!(:template, :datacenter)
@@ -84,13 +85,13 @@ class Chef
           super
 
           @create_options = {
-            name:         @name_args[0],
-            type:         "clone",
-            template:     locate_config_value(:template),
-            targethost:   locate_config_value(:targethost),
-            datacenter:   locate_config_value(:datacenter),
-            poweron:      !locate_config_value(:disable_power_on),
-            folder:       locate_config_value(:folder),
+            name: @name_args[0],
+            type: "clone",
+            template: locate_config_value(:template),
+            targethost: locate_config_value(:targethost),
+            datacenter: locate_config_value(:datacenter),
+            poweron: !locate_config_value(:disable_power_on),
+            folder: locate_config_value(:folder),
             resource_pool: locate_config_value(:pool),
           }
         end
@@ -100,8 +101,7 @@ class Chef
         def before_bootstrap
           super
 
-          config[:chef_node_name] = locate_config_value(:chef_node_name) ? locate_config_value(:chef_node_name) : server.name
-
+          config[:chef_node_name] = locate_config_value(:chef_node_name) || server.name
 
           config[:bootstrap_ip_address] = hostname_for_server
         end

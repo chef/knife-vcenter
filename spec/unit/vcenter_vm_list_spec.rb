@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 #
 # Author:: Chef Partner Engineering (<partnereng@chef.io>)
-# Copyright:: Copyright (c) 2017 Chef Software, Inc.
+# Copyright:: Copyright (c) 2017-2018 Chef Software, Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-require 'spec_helper'
-require 'chef/knife/vcenter_vm_list'
-require 'support/shared_examples_for_command'
+require "spec_helper"
+require "chef/knife/vcenter_vm_list"
+require "support/shared_examples_for_command"
 
 class PowerStatus < BasicObject
   attr_reader :value
@@ -33,34 +33,33 @@ describe Chef::Knife::Cloud::VcenterVmList do
 
   subject { described_class.new }
 
-  describe '#format_power_status' do
+  describe "#format_power_status" do
     context 'when the power is "POWERED_ON"' do
-      it 'displays with green' do
-        expect(subject.ui).to receive(:color).with('POWERED_ON', :green)
-        subject.format_power_status(PowerStatus.new('POWERED_ON'))
+      it "displays with green" do
+        expect(subject.ui).to receive(:color).with("POWERED_ON", :green)
+        subject.format_power_status(PowerStatus.new("POWERED_ON"))
       end
     end
 
     context 'when the power is "POWERED_OFF"' do
-      it 'displays with red' do
-        expect(subject.ui).to receive(:color).with('POWERED_OFF', :red)
-        subject.format_power_status(PowerStatus.new('POWERED_OFF'))
+      it "displays with red" do
+        expect(subject.ui).to receive(:color).with("POWERED_OFF", :red)
+        subject.format_power_status(PowerStatus.new("POWERED_OFF"))
       end
     end
 
     context 'when the power is "SUSPENDED"' do
-      it 'displays with red' do
-        expect(subject.ui).to receive(:color).with('SUSPENDED', :yellow)
-        subject.format_power_status(PowerStatus.new('SUSPENDED'))
-      end      
-    end    
+      it "displays with red" do
+        expect(subject.ui).to receive(:color).with("SUSPENDED", :yellow)
+        subject.format_power_status(PowerStatus.new("SUSPENDED"))
+      end
+    end
   end
 
-  describe '#format_memory_value' do
-    context 'when the memory value is 8192' do
-      it 'displays as 8,192' do
-        expect(subject.ui).to receive(:text).with('8,192')
-        subject.format_memory_value(8192)
+  describe "#format_memory_value" do
+    context "when the memory value is 8192" do
+      it "returns 8,192" do
+        expect(subject.format_memory_value(8192)).to eq("8,192")
       end
     end
   end

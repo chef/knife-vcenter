@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-require 'logger'
+require "logger"
 
 # Base module for vcenter knife commands
 module Base
@@ -33,7 +33,7 @@ module Base
   #
   def self.init_logger
     log = Logger.new(STDOUT)
-    log.progname = 'Knife VCenter'
+    log.progname = "Knife VCenter"
     log.level = Logger::INFO
     log
   end

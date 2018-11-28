@@ -17,12 +17,12 @@
 # limitations under the License.
 #
 
-require 'chef/knife'
-require 'chef/knife/cloud/server/delete_options'
-require 'chef/knife/cloud/server/delete_command'
-require 'chef/knife/cloud/vcenter_service'
-require 'chef/knife/cloud/vcenter_service_helpers'
-require 'chef/knife/cloud/vcenter_service_options'
+require "chef/knife"
+require "chef/knife/cloud/server/delete_options"
+require "chef/knife/cloud/server/delete_command"
+require "chef/knife/cloud/vcenter_service"
+require "chef/knife/cloud/vcenter_service_helpers"
+require "chef/knife/cloud/vcenter_service_options"
 
 class Chef
   class Knife
@@ -33,14 +33,14 @@ class Chef
         include VcenterServiceOptions
         include VcenterServiceHelpers
 
-        banner 'knife vcenter vm delete NAME [NAME] (options)'
+        banner "knife vcenter vm delete NAME [NAME] (options)"
 
         # rubocop:disable Style/GuardClause
         # Validates the parameters to make sure we're good.
         #
         def validate_params!
           if @name_args.empty?
-            ui.error('You must supply the name of the virtual machine to delete.')
+            ui.error("You must supply the name of the virtual machine to delete.")
             exit(1) if @name_args.empty?
           end
         end

@@ -1,11 +1,17 @@
 # Change Log
 
+<!-- latest_release -->
+<!-- latest_release -->
+<!-- release_rollup -->
+<!-- release_rollup -->
+<!-- latest_stable_release -->
 ## [2.0.0](https://github.com/chef/knife-vcenter/tree/2.0.0) (2017-09-15)
 [Full Changelog](https://github.com/chef/knife-vcenter/compare/v1.1.1...2.0.0)
 
 **Merged pull requests:**
 
 - Unpinning Chef, because it is an dependency. [\#8](https://github.com/chef/knife-vcenter/pull/8) ([jjasghar](https://github.com/jjasghar))
+<!-- latest_stable_release -->
 
 ## [v1.1.1](https://github.com/chef/knife-vcenter/tree/v1.1.1) (2017-09-14)
 [Full Changelog](https://github.com/chef/knife-vcenter/compare/v1.1.0...v1.1.1)

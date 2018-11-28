@@ -17,12 +17,12 @@
 # limitations under the License.
 #
 
-require 'chef/knife'
-require 'chef/knife/cloud/server/list_command'
-require 'chef/knife/cloud/server/list_options'
-require 'chef/knife/cloud/vcenter_service'
-require 'chef/knife/cloud/vcenter_service_helpers'
-require 'chef/knife/cloud/vcenter_service_options'
+require "chef/knife"
+require "chef/knife/cloud/server/list_command"
+require "chef/knife/cloud/server/list_options"
+require "chef/knife/cloud/vcenter_service"
+require "chef/knife/cloud/vcenter_service_helpers"
+require "chef/knife/cloud/vcenter_service_options"
 
 class Chef
   # The main knife class
@@ -34,20 +34,20 @@ class Chef
         include VcenterServiceHelpers
         include VcenterServiceOptions
 
-        banner 'knife vcenter vm list'
+        banner "knife vcenter vm list"
 
         # Sets up the columns for listing out and sorts by name
         #
         def before_exec_command
           @columns_with_info = [
-            { label: 'ID',    key: 'vm' },
-            { label: 'Name',  key: 'name' },
-            { label: 'Power State', key: 'power_state', value_callback: method(:format_power_status) },
-            { label: 'CPU Count', key: 'cpu_count'},
-            { label: 'RAM Size (MB)', key: 'memory_size_MiB', value_callback: method(:format_memory_value) },
+            { label: "ID",    key: "vm" },
+            { label: "Name",  key: "name" },
+            { label: "Power State", key: "power_state", value_callback: method(:format_power_status) },
+            { label: "CPU Count", key: "cpu_count" },
+            { label: "RAM Size (MB)", key: "memory_size_MiB", value_callback: method(:format_memory_value) }
           ]
 
-          @sort_by_field = 'name'
+          @sort_by_field = "name"
         end
 
         # Sets the color for the different status of the machines
@@ -55,12 +55,12 @@ class Chef
         def format_power_status(status)
           status_check = status.value
           status_color = case status_check
-                          when 'POWERED_OFF'
-                            :red
-                          when 'POWERED_ON'
-                            :green
-                          when 'SUSPENDED'
-                            :yellow
+                         when "POWERED_OFF"
+                           :red
+                         when "POWERED_ON"
+                           :green
+                         when "SUSPENDED"
+                           :yellow
                           end
 
           ui.color(status.value, status_color)
@@ -70,7 +70,7 @@ class Chef
         #
         # @param [Object] value takes the number and formats it how you need it to
         def format_memory_value(value)
-          value.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse
+          value.to_s.reverse.gsub(/...(?=.)/, '\&,').reverse
         end
       end
     end

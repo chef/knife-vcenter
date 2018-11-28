@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-require 'rbvmomi'
+require "rbvmomi"
 
 class Support
   class CloneVm
@@ -64,10 +64,10 @@ class Support
       if new_vm.nil?
         puts format("Unable to find machine: %s", name)
       else
-        puts 'Waiting for network interfaces to become available...'
+        puts "Waiting for network interfaces to become available..."
         sleep 2 while new_vm.guest.net.empty? || !new_vm.guest.ipAddress
         new_vm.guest.net[0].ipConfig.ipAddress.detect do |addr|
-          addr.origin != 'linklayer'
+          addr.origin != "linklayer"
         end.ipAddress
       end
     end
