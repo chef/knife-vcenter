@@ -13,6 +13,7 @@ group :test do
   gem "rake"
   gem "vsphere-automation-sdk", git: "https://github.com/vmware/vsphere-automation-sdk-ruby.git", branch: "master"
 end
+
 instance_eval(ENV["GEMFILE_MOD"]) if ENV["GEMFILE_MOD"]
 
 # If you want to load debugging tools into the bundle exec sandbox,

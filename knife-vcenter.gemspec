@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "savon", "~> 2.11"
   spec.add_dependency "vsphere-automation-sdk", "~> 6.6"
 
-  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "debase"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "ruby-debug-ide", "~> 0.6.0"
