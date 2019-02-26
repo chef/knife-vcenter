@@ -58,8 +58,7 @@ class Chef
         #
         # @param [Object] status takes the number and formats it how you need it to
         def format_power_status(status)
-          status_check = status.value
-          status_color = case status_check
+          status_color = case status
                          when "POWERED_OFF"
                            :red
                          when "POWERED_ON"
@@ -68,7 +67,7 @@ class Chef
                            :yellow
                           end
 
-          ui.color(status.value, status_color)
+          ui.color(status, status_color)
         end
       end
     end

@@ -21,19 +21,12 @@ require "chef/knife/cloud/exceptions"
 require "chef/knife/cloud/service"
 require "chef/knife/cloud/helpers"
 require "chef/knife/cloud/vcenter_service_helpers"
-require "net/http"
 require "uri"
 require "json"
 require "ostruct"
-require "lookup_service_helper"
-require "vapi"
-require "com/vmware/cis"
-require "com/vmware/vcenter"
-require "com/vmware/vcenter/vm"
-require "sso"
-require "base"
+require "vsphere-automation-cis"
+require "vsphere-automation-vcenter"
 require "set"
-require "support/clone_vm"
 
 class Chef
   # The main knife class
@@ -44,43 +37,30 @@ class Chef
       class VcenterService < Service
         include VcenterServiceHelpers
 
-        attr_reader :vapi_config, :session_svc, :session_id
+        attr_reader :api_client, :session_api, :session_id
         attr_reader :connection_options, :ipaddress
 
         def initialize(options = {})
           super(options)
 
-          # Using the information supplied, configure the connection to vCentre
-          lookup_service_helper = LookupServiceHelper.new(options[:host])
+          configuration = VSphereAutomation::Configuration.new.tap do |c|
+            c.host = options[:host]
+            c.username = options[:username]
+            c.password = options[:password]
+            c.scheme = "https"
+            c.verify_ssl = options[:verify_ssl]
+            c.verify_ssl_host = options[:verify_ssl]
+          end
 
-          vapi_urls = lookup_service_helper.find_vapi_urls
-          vapi_url = vapi_urls.values[0]
-          Base.log.info(format("Vapi URL: %s", vapi_url)) if options[:vcenter_logs]
+          Base.log.warn("SSL Verification is turned OFF") if options[:logs] && !options[:verify_ssl]
 
-          # Create the VAPI config object
-          ssl_options = {}
-          ssl_options[:verify] = if options[:verify_ssl]
-                                   :peer
-                                 else
-                                   Base.log.warn("SSL Verification is turned OFF") if options[:vcenter_logs]
-                                   :none
-                                 end
-          @vapi_config = VAPI::Bindings::VapiConfig.new(vapi_url, ssl_options)
+          @api_client = VSphereAutomation::ApiClient.new(configuration)
+          api_client.default_headers["Authorization"] = configuration.basic_auth_token
 
-          # get the SSO url
-          sso_url = lookup_service_helper.find_sso_url
-          sso = SSO::Connection.new(sso_url).login(options[:username], options[:password])
-          token = sso.request_bearer_token
-          vapi_config.set_security_context(
-            VAPI::Security.create_saml_bearer_security_context(token.to_s)
-          )
+          session_api = VSphereAutomation::CIS::SessionApi.new(api_client)
+          session_id = session_api.create("").value
 
-          # Login and get the session information
-          @session_svc = Com::Vmware::Cis::Session.new(vapi_config)
-          @session_id = session_svc.create
-          vapi_config.set_security_context(
-            VAPI::Security.create_session_security_context(session_id)
-          )
+          api_client.default_headers["vmware-api-session-id"] = session_id
 
           # Set the class properties for the rbvmomi connections
           @connection_options = {
@@ -96,7 +76,7 @@ class Chef
         # @param [Object] options to override anything you need to do
         def create_server(options = {})
           # Create the vm object
-          vmobj = Com::Vmware::Vcenter::VM.new(vapi_config)
+          vm_api = VSphereAutomation::VCenter::VMApi.new(api_client)
 
           # Use the option to determine now a new machine is being created
           case options[:type]
@@ -128,24 +108,24 @@ class Chef
           when "create"
 
             # Create the placement object
-            placementspec = Com::Vmware::Vcenter::VM::PlacementSpec.new
-            placementspec.folder = get_folder(options[:folder])
-            placementspec.host = get_host(options[:targethost])
-            placementspec.datastore = get_datastore(options[:datastore])
-            placementspec.resource_pool = get_resourcepool(options[:resource_pool])
+            placement_spec = VSphereAutomation::VCenter::VcenterVMPlacementSpec.new( ###
+              folder: get_folder(options[:folder]),
+              host: get_host(options[:targethost]).host,
+              datastore: get_datastore(options[:datastore]),
+              resource_pool: get_resourcepool(options[:resource_pool])
+            )
 
             # Create the CreateSpec object
-            createspec = Com::Vmware::Vcenter::VM::CreateSpec.new
-
-            createspec.name = options[:name]
-            puts "seting the OS"
-            createspec.guest_OS = Com::Vmware::Vcenter::Vm::GuestOS::UBUNTU_64
-            puts "setting the placement"
-            createspec.placement = placementspec
+            create_spec = VSphereAutomation::VCenter::VcenterVMCreateSpec.new(
+              name: options[:name],
+              guest_OS: VSphereAutomation::VCenter::VcenterVmGuestOS::OTHER,
+              placement: placement_spec
+            )
 
             # Create the new machine
             begin
-              vm = vmobj.create(createspec)
+              create_model = VSphereAutomation::VCenter::VcenterVMCreate.new(spec: create_spec)
+              vm = vm_api.create(create_model).value
             rescue StandardError => e
               puts e.message
             end
@@ -155,111 +135,112 @@ class Chef
         # Get a list of vms from the API
         #
         def list_servers
-          Com::Vmware::Vcenter::VM.new(vapi_config).list
+          vms = VSphereAutomation::VCenter::VMApi.new(api_client).list.value
+
+          # list_resource_command uses .send(:name) syntax, so convert to OpenStruct to keep it compatible
+          vms.map { |vmsummary| OpenStruct.new(vmsummary.to_hash) }
         end
 
         # Return a list of the hosts in the vCenter
         #
         def list_hosts
-          Com::Vmware::Vcenter::Host.new(vapi_config).list
+          VSphereAutomation::VCenter::HostApi.new(api_client).list.value
         end
 
         # Return a list of the datacenters in the vCenter
         #
         def list_datacenters
-          Com::Vmware::Vcenter::Datacenter.new(vapi_config).list
+          VSphereAutomation::VCenter::DatacenterApi.new(api_client).list.value
         end
 
         # Return a list of the clusters in the vCenter
         #
         def list_clusters
-          Com::Vmware::Vcenter::Cluster.new(vapi_config).list
+          VSphereAutomation::VCenter::ClusterApi.new(api_client).list.value
         end
 
         # Checks to see if the datacenter exists in the vCenter
         #
         # @param [String] name is the name of the datacenter
         def datacenter_exists?(name)
-          filter = Com::Vmware::Vcenter::Datacenter::FilterSpec.new(names: Set.new([name]))
-          dc_obj = Com::Vmware::Vcenter::Datacenter.new(vapi_config)
-          dc = dc_obj.list(filter)
+          dc_api = VSphereAutomation::VCenter::DatacenterApi.new(api_client)
+          dcs = dc_api.list({ filter_names: name }).value
 
-          raise format("Unable to find data center: %s", name) if dc.empty?
+          raise format("Unable to find data center: %s", name) if dcs.empty?
         end
 
         # Gets the folder
         #
         # @param [String] name is the folder of the datacenter
         def get_folder(name)
-          # Create a filter to ensure that only the named folder is returned
-          filter = Com::Vmware::Vcenter::Folder::FilterSpec.new(names: Set.new([name]))
-          # filter.names = name
-          folder_obj = Com::Vmware::Vcenter::Folder.new(vapi_config)
-          folder = folder_obj.list(filter)
+          folder_api = VSphereAutomation::VCenter::FolderApi.new(api_client)
+          folders = folder_api.list({ filter_names: name }).value
 
-          folder[0].folder
+          raise format("Unable to find folder: %s", name) if folders.empty?
+
+          folders.first.folder
         end
 
         # Gets the host
         #
         # @param [String] name is the host of the datacenter
         def get_host(name)
-          host_obj = Com::Vmware::Vcenter::Host.new(vapi_config)
+          # create a host object to work with
+          host_api = VSphereAutomation::VCenter::HostApi.new(api_client)
 
           if name.nil?
-            host = host_obj.list
+            hosts = host_api.list.value
           else
-            filter = Com::Vmware::Vcenter::Host::FilterSpec.new(names: Set.new([name]))
-            host = host_obj.list(filter)
+            hosts = host_api.list({ filter_names: name }).value
           end
 
-          host[0].host
+          raise format("Unable to find target host: %s", name) if hosts.empty?
+
+          hosts.first
         end
 
         # Gets the datastore
         #
         # @param [String] name is the datastore of the datacenter
         def get_datastore(name)
-          datastore_obj = Com::Vmware::Vcenter::Datastore.new(vapi_config)
+          ds_api = VSphereAutomation::VCenter::DatastoreApi.new(api_client)
+          ds = ds_api.list({ filter_names: name }).value
 
-          if name.nil?
-            datastore = datastore_obj.list
-          else
-            filter = Com::Vmware::Vcenter::Datastore::FilterSpec.new(names: Set.new([name]))
-            datastore = datastore_obj.list(filter)
-          end
-
-          datastore[0].datastore
+          raise format("Unable to find data store: %s", name) if ds.empty?
+          ds.first.datastore
         end
 
         # Gets the resource_pool
         #
         # @param [String] name is the resource_pool of the datacenter
-        def get_resource_pool(name)
-          # Create a resource pool object
-          rp_obj = Com::Vmware::Vcenter::ResourcePool.new(vapi_config)
+        def get_resourcepool(name)
+### verify
+          rp_api = VSphereAutomation::VCenter::ResourcePoolApi.new(api_client)
 
-          # If a name has been set then try to find it, otherwise use the first
-          # resource pool that can be found
           if name.nil?
-            resource_pool = rp_obj.list
+            # Remove default pool for first pass (<= 1.2.1 behaviour to pick first user-defined pool found)
+            resource_pools = rp_api.list.value.delete_if { |pool| pool.name == "Resources" }
+            puts "Search of all resource pools found: " + resource_pools.map { |pool| pool.name }.to_s
+
+            # Revert to default pool, if no user-defined pool found (> 1.2.1 behaviour)
+            # (This one might not be found under some circumstances by the statement above)
+            return get_resource_pool("Resources") if resource_pools.empty?
           else
-            # create a filter to find the named resource pool
-            filter = Com::Vmware::Vcenter::ResourcePool::FilterSpec.new(names: Set.new([name]))
-            resource_pool = rp_obj.list(filter)
-            raise format("Unable to find Resource Pool: %s", name) if resource_pool.nil?
+            resource_pools = rp_api.list({ filter_names: name }).value
+            puts "Search for resource pools found: " + resource_pools.map { |pool| pool.name }.to_s
           end
 
-          resource_pool[0].resource_pool
+          raise format("Unable to find Resource Pool: %s", name) if resource_pools.empty?
+
+          resource_pools.first.resource_pool
         end
 
         # Gets the server
         #
         # @param [String] name is the server of the datacenter
         def get_server(name)
-          filter = Com::Vmware::Vcenter::VM::FilterSpec.new(names: Set.new([name]))
-          vm_obj = Com::Vmware::Vcenter::VM.new(vapi_config)
-          vm_obj.list(filter)[0]
+          vm_api = VSphereAutomation::VCenter::VMApi.new(api_client)
+          vm_api.list({ filter_names: name }).value.first
         end
 
         # Deletes the VM
@@ -272,16 +253,16 @@ class Chef
 
           ui.confirm("Do you really want to be delete this virtual machine")
 
-          vm_obj = Com::Vmware::Vcenter::VM.new(vapi_config)
+          vm_api = VSphereAutomation::VCenter::VMApi.new(api_client)
 
           # check the power state of the machine, if it is powered on turn it off
-          if vm.power_state.value == "POWERED_ON"
-            power = Com::Vmware::Vcenter::Vm::Power.new(vapi_config)
+          if vm.power_state == "POWERED_ON"
+            power_api = VSphereAutomation::VCenter::VmPowerApi.new(api_client)
             ui.msg("Shutting down machine")
-            power.stop(vm.vm)
+            power_api.stop(vm.vm)
           end
 
-          vm_obj.delete(vm.vm)
+          vm_api.delete(vm.vm)
         end
 
         # Gets some server information
