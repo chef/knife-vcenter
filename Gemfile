@@ -2,6 +2,10 @@ source "https://rubygems.org"
 
 gemspec
 
+group :development do
+  gem "chefstyle", git: "https://github.com/chef/chefstyle.git", branch: "master"
+end
+
 group :docs do
   gem "github-markup"
   gem "redcarpet"
@@ -9,9 +13,11 @@ group :docs do
 end
 
 group :test do
-  gem "chefstyle", "= 0.10.0"
   gem "rake"
-  gem "vsphere-automation-sdk", git: "https://github.com/vmware/vsphere-automation-sdk-ruby.git", branch: "master"
+  gem "pry"
+  gem "pry-byebug"
+  gem "pry-stack_explorer"
+  gem "rb-readline"
 end
 
 instance_eval(ENV["GEMFILE_MOD"]) if ENV["GEMFILE_MOD"]
