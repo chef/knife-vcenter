@@ -21,6 +21,7 @@ require "chef/knife/cloud/exceptions"
 require "chef/knife/cloud/service"
 require "chef/knife/cloud/helpers"
 require "chef/knife/cloud/vcenter_service_helpers"
+require "support/clone_vm"
 require "uri"
 require "json"
 require "ostruct"
@@ -86,7 +87,7 @@ class Chef
 
             # Some of ht eoptions need to be the ID of the component in VMware
             # Update these using the REST API so that they can be passed to the support library
-            options[:targethost] = get_host(options[:targethost])
+            options[:targethost] = get_host(options[:targethost]).host
 
             options[:resource_pool] = get_resource_pool(options[:resource_pool])
 
@@ -99,7 +100,7 @@ class Chef
             end
 
             # Clone the machine using the support library
-            clone_obj = Support::CloneVm.new(connection_options, options)
+            clone_obj = ::Support::CloneVm.new(connection_options, options)
             @ipaddress = clone_obj.clone
 
             # return an object from the restapi
@@ -112,7 +113,7 @@ class Chef
               folder: get_folder(options[:folder]),
               host: get_host(options[:targethost]).host,
               datastore: get_datastore(options[:datastore]),
-              resource_pool: get_resourcepool(options[:resource_pool])
+              resource_pool: get_resource_pool(options[:resource_pool])
             )
 
             # Create the CreateSpec object
@@ -213,8 +214,7 @@ class Chef
         # Gets the resource_pool
         #
         # @param [String] name is the resource_pool of the datacenter
-        def get_resourcepool(name)
-### verify
+        def get_resource_pool(name)
           rp_api = VSphereAutomation::VCenter::ResourcePoolApi.new(api_client)
 
           if name.nil?
