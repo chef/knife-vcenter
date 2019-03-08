@@ -126,7 +126,7 @@ class Chef
             # Create the new machine
             begin
               create_model = VSphereAutomation::VCenter::VcenterVMCreate.new(spec: create_spec)
-              vm = vm_api.create(create_model).value
+              vm_api.create(create_model).value
             rescue StandardError => e
               puts e.message
             end
