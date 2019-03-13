@@ -1,23 +1,20 @@
 # Change Log
 
-<!-- latest_release 2.0.3 -->
+<!-- latest_release -->
+<!-- latest_release -->
+<!-- release_rollup -->
+<!-- release_rollup -->
+<!-- latest_stable_release -->
 ## [v2.0.3](https://github.com/chef/knife-vcenter/tree/v2.0.3) (2019-03-13)
 
 #### Merged Pull Requests
 - Fix vm clone operation (issue #19) [#20](https://github.com/chef/knife-vcenter/pull/20) ([tecracer-theinen](https://github.com/tecracer-theinen))
-<!-- latest_release -->
-<!-- release_rollup since=2.0.2 -->
-### Changes not yet released to rubygems.org
-
-#### Merged Pull Requests
-- Fix vm clone operation (issue #19) [#20](https://github.com/chef/knife-vcenter/pull/20) ([tecracer-theinen](https://github.com/tecracer-theinen)) <!-- 2.0.3 -->
-<!-- release_rollup -->
 <!-- latest_stable_release -->
+
 ## [v2.0.2](https://github.com/chef/knife-vcenter/tree/v2.0.2) (2019-02-26)
 
 #### Merged Pull Requests
 - Port to new vsphere-automation-sdk 0.1.0 [#18](https://github.com/chef/knife-vcenter/pull/18) ([tecracer-theinen](https://github.com/tecracer-theinen))
-<!-- latest_stable_release -->
 
 ## [v2.0.1](https://github.com/chef/knife-vcenter/tree/v2.0.1) (2018-11-28)
 
