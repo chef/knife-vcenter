@@ -152,6 +152,8 @@ There are some optional parameters that can be specified:
 
  - `--targethost` - The host that the virtual machine should be created on. If not specified the first host in the cluster is used.
  - `--folder` - Folder that machine should be stored in. If specified this must already exist.
+ - `--pool` - Name of resource pool to use when creating the machine
+ - `--disable_power_on` - Do not power on the machine. Default: false
 
 ```
 $ knife vcenter vm clone example-01 --targethost 172.16.20.3 --folder example --ssh-password P@ssw0rd! --datacenter Datacenter --template ubuntu16-template -N example-01

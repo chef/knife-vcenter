@@ -65,7 +65,7 @@ class Chef
                            :green
                          when "SUSPENDED"
                            :yellow
-                          end
+                         end
 
           ui.color(status, status_color)
         end
