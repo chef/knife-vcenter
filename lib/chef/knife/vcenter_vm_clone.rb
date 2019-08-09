@@ -39,33 +39,33 @@ class Chef
         banner "knife vcenter vm clone NAME (options)"
 
         option :template,
-               long: "--template NAME",
-               description: "Name of VM or template to use to clone machine from"
+          long: "--template NAME",
+          description: "Name of VM or template to use to clone machine from"
 
         option :targethost,
-               long: "--targethost HOST",
-               description: "Host that the machine should be created on"
+          long: "--targethost HOST",
+          description: "Host that the machine should be created on"
 
         option :datacenter,
-               long: "--datacenter NAME",
-               description: "The datacenter for vSphere"
+          long: "--datacenter NAME",
+          description: "The datacenter for vSphere"
 
         option :disable_power_on,
-               long: "--disable-power-on",
-               boolean: true,
-               default: false
+          long: "--disable-power-on",
+          boolean: true,
+          default: false
 
         option :folder,
-               long: "--folder NAME",
-               description: "Folder to deploy the new machine into"
+          long: "--folder NAME",
+          description: "Folder to deploy the new machine into"
 
         option :pool,
-               long: "--pool NAME",
-               description: "Name of resource pool to use when creating the machine"
+          long: "--pool NAME",
+          description: "Name of resource pool to use when creating the machine"
 
         option :node_ssl_verify_mode,
-               long: "--node-ssl-verify-mode [peer|none]",
-               description: "Whether or not to verify the SSL cert for all HTTPS requests."
+          long: "--node-ssl-verify-mode [peer|none]",
+          description: "Whether or not to verify the SSL cert for all HTTPS requests."
 
         # Validates the parameters and maksessure you have a template, name, or datacenter
         #

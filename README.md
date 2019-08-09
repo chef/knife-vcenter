@@ -4,6 +4,14 @@
 [![Build Status](https://travis-ci.org/chef/knife-vcenter.svg?branch=master)](https://travis-ci.org/chef/knife-vcenter)
 [![Inline docs](http://inch-ci.org/github/chef/knife-vcenter.svg?branch=master)](http://inch-ci.org/github/chef/knife-vcenter)
 
+**Umbrella Project**: [Knife](https://github.com/chef/chef-oss-practices/blob/master/projects/knife.md)
+
+ **Project State**: [Active](https://github.com/chef/chef-oss-practices/blob/master/repo-management/repo-states.md#active)
+
+ **Issues [Response Time Maximum](https://github.com/chef/chef-oss-practices/blob/master/repo-management/repo-states.md)**: 14 days
+
+ **Pull Request [Response Time Maximum](https://github.com/chef/chef-oss-practices/blob/master/repo-management/repo-states.md)**: 14 days
+
 This is the official Chef Knife plugin for VMware REST API. This plugin gives knife the ability to create, bootstrap, and manage VMware vms.
 - Documentation: [https://github.com/chef/knife-vcenter/blob/master/README.md](https://github.com/chef/knife-vcenter/blob/master/README.md)
 - Source: [https://github.com/chef/knife-vcenter/tree/master](https://github.com/chef/knife-vcenter/tree/master)

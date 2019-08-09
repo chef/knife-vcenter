@@ -38,20 +38,20 @@ class Chef
         banner "knife vcenter vm create NAME"
 
         option :targethost,
-               long: "--targethost HOST",
-               description: "vCenter host on which the new VM should be created"
+          long: "--targethost HOST",
+          description: "vCenter host on which the new VM should be created"
 
         option :folder,
-               long: "--folder FOLDER",
-               description: "Folder in which the machine will reside"
+          long: "--folder FOLDER",
+          description: "Folder in which the machine will reside"
 
         option :datastore,
-               long: "--datastore DATASTORE",
-               description: "Datastore to be used for the disks etc"
+          long: "--datastore DATASTORE",
+          description: "Datastore to be used for the disks etc"
 
         option :resource_pool,
-               long: "--resource_pool RESOURCEPOOOL",
-               description: "Resource Pool to create the machine"
+          long: "--resource_pool RESOURCEPOOOL",
+          description: "Resource Pool to create the machine"
 
         # Validates the parameters, you need that unique name person!
         #

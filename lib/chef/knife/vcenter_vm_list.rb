@@ -44,7 +44,7 @@ class Chef
             { label: "Name",  key: "name" },
             { label: "Power State", key: "power_state", value_callback: method(:format_power_status) },
             { label: "CPU Count", key: "cpu_count" },
-            { label: "RAM Size (MB)", key: "memory_size_MiB", value_callback: method(:format_memory_value) }
+            { label: "RAM Size (MB)", key: "memory_size_MiB", value_callback: method(:format_memory_value) },
           ]
 
           @sort_by_field = "name"

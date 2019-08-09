@@ -42,7 +42,7 @@ class Chef
             { label: "ID",    key: "host" },
             { label: "Name",  key: "name" },
             { label: "Power State", key: "power_state", value_callback: method(:format_power_status) },
-            { label: "Connection State", key: "connection_state" }
+            { label: "Connection State", key: "connection_state" },
           ]
 
           @sort_by_field = "name"
