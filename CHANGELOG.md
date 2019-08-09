@@ -1,8 +1,16 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release 2.0.4 -->
+## [v2.0.4](https://github.com/chef/knife-vcenter/tree/v2.0.4) (2019-08-09)
+
+#### Merged Pull Requests
+- Update README for OSS Best Practices &amp; fix chefstyle warnings [#21](https://github.com/chef/knife-vcenter/pull/21) ([samshinde](https://github.com/samshinde))
 <!-- latest_release -->
 <!-- release_rollup -->
+### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- Update README for OSS Best Practices &amp; fix chefstyle warnings [#21](https://github.com/chef/knife-vcenter/pull/21) ([samshinde](https://github.com/samshinde)) <!-- 2.0.4 -->
 <!-- release_rollup -->
 <!-- latest_stable_release -->
 ## [v2.0.3](https://github.com/chef/knife-vcenter/tree/v2.0.3) (2019-03-13)
