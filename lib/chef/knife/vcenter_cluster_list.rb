@@ -40,7 +40,7 @@ class Chef
             { label: "ID",    key: "cluster" },
             { label: "Name",  key: "name" },
             { label: "DRS?", key: "drs_enabled", value_callback: method(:format_boolean) },
-            { label: "HA?", key: "ha_enabled", value_callback: method(:format_boolean) }
+            { label: "HA?", key: "ha_enabled", value_callback: method(:format_boolean) },
           ]
 
           @sort_by_field = "name"

@@ -208,6 +208,7 @@ class Chef
           ds = ds_api.list({ filter_names: name }).value
 
           raise format("Unable to find data store: %s", name) if ds.empty?
+
           ds.first.datastore
         end
 
@@ -220,14 +221,14 @@ class Chef
           if name.nil?
             # Remove default pool for first pass (<= 1.2.1 behaviour to pick first user-defined pool found)
             resource_pools = rp_api.list.value.delete_if { |pool| pool.name == "Resources" }
-            puts "Search of all resource pools found: " + resource_pools.map { |pool| pool.name }.to_s
+            puts "Search of all resource pools found: " + resource_pools.map(&:name).to_s
 
             # Revert to default pool, if no user-defined pool found (> 1.2.1 behaviour)
             # (This one might not be found under some circumstances by the statement above)
             return get_resource_pool("Resources") if resource_pools.empty?
           else
             resource_pools = rp_api.list({ filter_names: name }).value
-            puts "Search for resource pools found: " + resource_pools.map { |pool| pool.name }.to_s
+            puts "Search for resource pools found: " + resource_pools.map(&:name).to_s
           end
 
           raise format("Unable to find Resource Pool: %s", name) if resource_pools.empty?

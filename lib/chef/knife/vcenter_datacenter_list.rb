@@ -40,7 +40,7 @@ class Chef
         def before_exec_command
           @columns_with_info = [
             { label: "ID",    key: "datacenter" },
-            { label: "Name",  key: "name" }
+            { label: "Name",  key: "name" },
           ]
 
           @sort_by_field = "name"
