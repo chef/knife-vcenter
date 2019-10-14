@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "knife-cloud", ">= 1.2", "< 3.0"
   spec.add_dependency "rb-readline", "~> 0.5"
-  spec.add_dependency "rbvmomi", "~> 1.11"
+  spec.add_dependency "rbvmomi", ">= 1.11", "< 3.0"
   spec.add_dependency "savon", "~> 2.11"
   spec.add_dependency "vsphere-automation-sdk", "~> 0.1"
 
