@@ -16,7 +16,6 @@ Gem::Specification.new do |spec|
   spec.license       = "Apache-2.0"
 
   spec.files         = Dir["LICENSE", "lib/**/*"]
-  spec.test_files    = Dir["spec/**/*"]
   spec.require_paths = ["lib"]
 
   spec.required_ruby_version = ">= 2.3"
