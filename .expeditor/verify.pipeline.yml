@@ -1,6 +1,24 @@
 ---
 
 steps:
+- label: run-specs-ruby-2.3
+  command:
+    - bundle install --jobs=7 --retry=3 --without docs
+    - bundle exec rake
+  expeditor:
+    executor:
+      docker:
+        image: ruby:2.3-stretch
+
+- label: run-specs-ruby-2.4
+  command:
+    - bundle install --jobs=7 --retry=3 --without docs
+    - bundle exec rake
+  expeditor:
+    executor:
+      docker:
+        image: ruby:2.4-stretch
+
 - label: run-specs-ruby-2.5
   command:
     - bundle install --jobs=7 --retry=3 --without docs
