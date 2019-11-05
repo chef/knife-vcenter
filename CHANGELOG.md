@@ -1,24 +1,21 @@
 # Change Log
 
-<!-- latest_release 2.1.0 -->
+<!-- latest_release -->
+<!-- latest_release -->
+<!-- release_rollup -->
+<!-- release_rollup -->
+<!-- latest_stable_release -->
 ## [v2.1.0](https://github.com/chef/knife-vcenter/tree/v2.1.0) (2019-11-05)
 
 #### Merged Pull Requests
 - Allow rbvmomi 2.x [#30](https://github.com/chef/knife-vcenter/pull/30) ([tas50](https://github.com/tas50))
-<!-- latest_release -->
-<!-- release_rollup since=2.0.8 -->
-### Changes not yet released to rubygems.org
-
-#### Merged Pull Requests
-- Allow rbvmomi 2.x [#30](https://github.com/chef/knife-vcenter/pull/30) ([tas50](https://github.com/tas50)) <!-- 2.1.0 -->
-<!-- release_rollup -->
 <!-- latest_stable_release -->
+
 ## [v2.0.8](https://github.com/chef/knife-vcenter/tree/v2.0.8) (2019-10-31)
 
 #### Merged Pull Requests
 - Remove travis config and badge [#25](https://github.com/chef/knife-vcenter/pull/25) ([tas50](https://github.com/tas50))
 - Don&#39;t ship the specs dir in the gem artifact [#29](https://github.com/chef/knife-vcenter/pull/29) ([tas50](https://github.com/tas50))
-<!-- latest_stable_release -->
 
 ## [v2.0.6](https://github.com/chef/knife-vcenter/tree/v2.0.6) (2019-10-12)
 
