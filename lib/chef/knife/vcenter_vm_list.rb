@@ -20,9 +20,9 @@
 require "chef/knife"
 require "chef/knife/cloud/server/list_command"
 require "chef/knife/cloud/server/list_options"
-require "chef/knife/cloud/vcenter_service"
-require "chef/knife/cloud/vcenter_service_helpers"
-require "chef/knife/cloud/vcenter_service_options"
+require_relative "cloud/vcenter_service"
+require_relative "cloud/vcenter_service_helpers"
+require_relative "cloud/vcenter_service_options"
 
 class Chef
   # The main knife class
