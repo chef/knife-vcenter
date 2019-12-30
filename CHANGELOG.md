@@ -1,24 +1,21 @@
 # Change Log
 
-<!-- latest_release 3.0.0 -->
+<!-- latest_release -->
+<!-- latest_release -->
+<!-- release_rollup -->
+<!-- release_rollup -->
+<!-- latest_stable_release -->
 ## [v3.0.0](https://github.com/chef/knife-vcenter/tree/v3.0.0) (2019-12-30)
 
 #### Merged Pull Requests
+- Substitute require for require_relative [#31](https://github.com/chef/knife-vcenter/pull/31) ([tas50](https://github.com/tas50))
 - Require Ruby 2.4+ and fix multiple testing issues [#32](https://github.com/chef/knife-vcenter/pull/32) ([tas50](https://github.com/tas50))
-<!-- latest_release -->
-<!-- release_rollup since=2.1.0 -->
-### Changes not yet released to rubygems.org
-
-#### Merged Pull Requests
-- Require Ruby 2.4+ and fix multiple testing issues [#32](https://github.com/chef/knife-vcenter/pull/32) ([tas50](https://github.com/tas50)) <!-- 3.0.0 -->
-- Substitute require for require_relative [#31](https://github.com/chef/knife-vcenter/pull/31) ([tas50](https://github.com/tas50)) <!-- 2.1.1 -->
-<!-- release_rollup -->
 <!-- latest_stable_release -->
+
 ## [v2.1.0](https://github.com/chef/knife-vcenter/tree/v2.1.0) (2019-11-05)
 
 #### Merged Pull Requests
 - Allow rbvmomi 2.x [#30](https://github.com/chef/knife-vcenter/pull/30) ([tas50](https://github.com/tas50))
-<!-- latest_stable_release -->
 
 ## [v2.0.8](https://github.com/chef/knife-vcenter/tree/v2.0.8) (2019-10-31)
 
