@@ -21,8 +21,6 @@
 require "chef/knife"
 require "chef/knife/cloud/server/create_command"
 require "chef/knife/cloud/server/create_options"
-require_relative "cloud/vcenter_service"
-require_relative "cloud/vcenter_service_helpers"
 require_relative "cloud/vcenter_service_options"
 
 class Chef
@@ -32,11 +30,15 @@ class Chef
     class Cloud
       # Extends the ServerCreateCommand for specific vCenter
       class VcenterVmClone < Chef::Knife::Cloud::ServerCreateCommand
-        include VcenterServiceHelpers
         include VcenterServiceOptions
         include ServerCreateOptions
 
         banner "knife vcenter vm clone NAME (options)"
+
+        # lazy load this file as it includes vmware deps that we only want at plugin runtime
+        deps do
+          require_relative "cloud/vcenter_service"
+        end
 
         option :template,
           long: "--template NAME",

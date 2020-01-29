@@ -20,8 +20,6 @@
 require "chef/knife"
 require "chef/knife/cloud/server/delete_options"
 require "chef/knife/cloud/server/delete_command"
-require_relative "cloud/vcenter_service"
-require_relative "cloud/vcenter_service_helpers"
 require_relative "cloud/vcenter_service_options"
 
 class Chef
@@ -31,9 +29,13 @@ class Chef
       class VcenterVmDelete < ServerDeleteCommand
         include ServerDeleteOptions
         include VcenterServiceOptions
-        include VcenterServiceHelpers
 
         banner "knife vcenter vm delete NAME [NAME] (options)"
+
+        # lazy load this file as it includes vmware deps that we only want at plugin runtime
+        deps do
+          require_relative "cloud/vcenter_service"
+        end
 
         # rubocop:disable Style/GuardClause
         # Validates the parameters to make sure we're good.

@@ -20,8 +20,6 @@
 require "chef/knife"
 require "chef/knife/cloud/server/show_options"
 require "chef/knife/cloud/server/show_command"
-require_relative "cloud/vcenter_service"
-require_relative "cloud/vcenter_service_helpers"
 require_relative "cloud/vcenter_service_options"
 
 class Chef
@@ -31,9 +29,14 @@ class Chef
       class VcenterVmShow < ServerShowCommand
         include ServerShowOptions
         include VcenterServiceOptions
-        include VcenterServiceHelpers
 
         banner "knife vcenter vm show NAME (options)"
+
+        # lazy load this file as it includes vmware deps that we only want at plugin runtime
+        deps do
+          require_relative "cloud/vcenter_service"
+        end
+
         def validate_params!
           if @name_args.empty?
             ui.error("You must supply the name of the virtual machine to display.")
