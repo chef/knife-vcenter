@@ -19,8 +19,6 @@
 
 require "chef/knife"
 require "chef/knife/cloud/list_resource_command"
-require_relative "cloud/vcenter_service"
-require_relative "cloud/vcenter_service_helpers"
 require_relative "cloud/vcenter_service_options"
 
 class Chef
@@ -28,10 +26,14 @@ class Chef
     class Cloud
       # Extends ResourceListcommand to talk to vCenter
       class VcenterClusterList < ResourceListCommand
-        include VcenterServiceHelpers
         include VcenterServiceOptions
 
         banner "knife vcenter cluster list"
+
+        # lazy load this file as it includes vmware deps that we only want at plugin runtime
+        deps do
+          require_relative "cloud/vcenter_service"
+        end
 
         # Creates the columns and how to sort the columns
         #

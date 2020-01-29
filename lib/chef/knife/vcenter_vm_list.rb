@@ -20,8 +20,6 @@
 require "chef/knife"
 require "chef/knife/cloud/server/list_command"
 require "chef/knife/cloud/server/list_options"
-require_relative "cloud/vcenter_service"
-require_relative "cloud/vcenter_service_helpers"
 require_relative "cloud/vcenter_service_options"
 
 class Chef
@@ -31,10 +29,14 @@ class Chef
     class Cloud
       # Extends the ServerListCommand for specific vCenter
       class VcenterVmList < Chef::Knife::Cloud::ServerListCommand
-        include VcenterServiceHelpers
         include VcenterServiceOptions
 
         banner "knife vcenter vm list"
+
+        # lazy load this file as it includes vmware deps that we only want at plugin runtime
+        deps do
+          require_relative "cloud/vcenter_service"
+        end
 
         # Sets up the columns for listing out and sorts by name
         #
