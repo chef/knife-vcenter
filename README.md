@@ -159,7 +159,7 @@ There are some optional parameters that can be specified:
 
  - `--targethost` - The host that the virtual machine should be created on. If not specified the first host in the cluster is used.
  - `--folder` - Folder that machine should be stored in. If specified this must already exist.
- - `--pool` - Name of resource pool to use when creating the machine
+ - `--pool` - Name of the resource pool to use when creating the machine
  - `--disable_power_on` - Do not power on the machine. Default: false
 
 ```
@@ -179,7 +179,7 @@ Waiting for sshd to host (10.0.0.167)
 
 Deletes a virtual machine from vSphere. If you supply `--purge` the machine will be removed from the Chef Server.
 
-NOTE: If the node name is different to the host name then the `-N` argument must be specified in conjunction with the `--purge` option
+NOTE: If the node name is different from the hostname then the `-N` argument must be specified in conjunction with the `--purge` option
 
 ```
 $ knife vcenter vm delete example-01 -N example-01 --purge
@@ -204,7 +204,7 @@ For information on contributing to this project see <https://github.com/chef/che
 * Report issues/questions/feature requests on [GitHub Issues][issues]
 
 Pull requests are very welcome! Make sure your patches are well tested.
-Ideally create a topic branch for every separate change you make. For
+Ideally, create a topic branch for every separate change you make. For
 example:
 
 1. Fork the repo
@@ -221,7 +221,7 @@ Author:: Russell Seymour ([rseymour@chef.io](mailto:rseymour@chef.io))
 
 Author:: JJ Asghar ([jj@chef.io](mailto:jj@chef.io))
 
-Copyright:: Copyright (c) 2017-2018 Chef Software, Inc.
+Copyright:: Copyright (c) 2017-2020 Chef Software, Inc.
 
 License:: Apache License, Version 2.0
 
