@@ -179,7 +179,7 @@ Waiting for sshd to host (10.0.0.167)
 
 Deletes a virtual machine from vSphere. If you supply `--purge` the machine will be removed from the Chef Server.
 
-NOTE: If the node name is different from the hostname then the `-N` argument must be specified in conjunction with the `--purge` option
+NOTE: The `--purge` option default expects the node name and hostname to be the same. Use `-N` if the node name and hostname are different.
 
 ```
 $ knife vcenter vm delete example-01 -N example-01 --purge
@@ -204,7 +204,7 @@ For information on contributing to this project see <https://github.com/chef/che
 * Report issues/questions/feature requests on [GitHub Issues][issues]
 
 Pull requests are very welcome! Make sure your patches are well tested.
-Ideally, create a topic branch for every separate change you make. For
+Please create a topic branch for every separate change you make. For
 example:
 
 1. Fork the repo
@@ -213,7 +213,6 @@ example:
 4. Commit your changes (`git commit -am 'Added some feature'`)
 5. Push to the branch (`git push origin my-new-feature`)
 6. Create new Pull Request
-
 
 ## License
 
