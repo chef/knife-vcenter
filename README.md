@@ -1,7 +1,7 @@
 # knife-vcenter
 
 [![Gem Version](https://badge.fury.io/rb/knife-vcenter.svg)](https://rubygems.org/gems/knife-vcenter)
-[![Inline docs](http://inch-ci.org/github/chef/knife-vcenter.svg?branch=master)](http://inch-ci.org/github/chef/knife-vcenter)
+[![Build status](https://badge.buildkite.com/47217bb5529337a493a4a29c8e45ea95f88997d981c2549b42.svg?branch=master)](https://buildkite.com/chef-oss/chef-knife-vcenter-master-verify)
 
 **Umbrella Project**: [Knife](https://github.com/chef/chef-oss-practices/blob/master/projects/knife.md)
 
