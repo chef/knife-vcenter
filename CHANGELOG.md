@@ -1,8 +1,16 @@
 # Change Log
 
+<!-- latest_release 3.0.3 -->
+## [v3.0.3](https://github.com/chef/knife-vcenter/tree/v3.0.3) (2020-04-09)
+
+#### Merged Pull Requests
+- Require ruby 2.5+ and allow for knife-cloud 3.x [#35](https://github.com/chef/knife-vcenter/pull/35) ([tas50](https://github.com/tas50))
 <!-- latest_release -->
-<!-- latest_release -->
-<!-- release_rollup -->
+<!-- release_rollup since=3.0.2 -->
+### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- Require ruby 2.5+ and allow for knife-cloud 3.x [#35](https://github.com/chef/knife-vcenter/pull/35) ([tas50](https://github.com/tas50)) <!-- 3.0.3 -->
 <!-- release_rollup -->
 <!-- latest_stable_release -->
 ## [v3.0.2](https://github.com/chef/knife-vcenter/tree/v3.0.2) (2020-02-12)
