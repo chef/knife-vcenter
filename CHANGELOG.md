@@ -1,24 +1,21 @@
 # Change Log
 
-<!-- latest_release 4.0.0 -->
+<!-- latest_release -->
+<!-- latest_release -->
+<!-- release_rollup -->
+<!-- release_rollup -->
+<!-- latest_stable_release -->
 ## [v4.0.0](https://github.com/chef/knife-vcenter/tree/v4.0.0) (2020-04-09)
 
 #### Merged Pull Requests
+- Require ruby 2.5+ and allow for knife-cloud 3.x [#35](https://github.com/chef/knife-vcenter/pull/35) ([tas50](https://github.com/tas50))
 - Add buildkite badge [#36](https://github.com/chef/knife-vcenter/pull/36) ([tas50](https://github.com/tas50))
-<!-- latest_release -->
-<!-- release_rollup since=3.0.2 -->
-### Changes not yet released to rubygems.org
-
-#### Merged Pull Requests
-- Add buildkite badge [#36](https://github.com/chef/knife-vcenter/pull/36) ([tas50](https://github.com/tas50)) <!-- 4.0.0 -->
-- Require ruby 2.5+ and allow for knife-cloud 3.x [#35](https://github.com/chef/knife-vcenter/pull/35) ([tas50](https://github.com/tas50)) <!-- 3.0.3 -->
-<!-- release_rollup -->
 <!-- latest_stable_release -->
+
 ## [v3.0.2](https://github.com/chef/knife-vcenter/tree/v3.0.2) (2020-02-12)
 
 #### Merged Pull Requests
 - Remove unused savon dependency [#34](https://github.com/chef/knife-vcenter/pull/34) ([tas50](https://github.com/tas50))
-<!-- latest_stable_release -->
 
 ## [v3.0.1](https://github.com/chef/knife-vcenter/tree/v3.0.1) (2020-01-29)
 
