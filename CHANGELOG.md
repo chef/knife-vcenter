@@ -1,8 +1,16 @@
 # Change Log
 
+<!-- latest_release 4.0.1 -->
+## [v4.0.1](https://github.com/chef/knife-vcenter/tree/v4.0.1) (2020-04-16)
+
+#### Merged Pull Requests
+- Update chefstyle requirement from ~&gt; 0.15 to ~&gt; 1.0 [#37](https://github.com/chef/knife-vcenter/pull/37) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
 <!-- latest_release -->
-<!-- latest_release -->
-<!-- release_rollup -->
+<!-- release_rollup since=4.0.0 -->
+### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- Update chefstyle requirement from ~&gt; 0.15 to ~&gt; 1.0 [#37](https://github.com/chef/knife-vcenter/pull/37) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 4.0.1 -->
 <!-- release_rollup -->
 <!-- latest_stable_release -->
 ## [v4.0.0](https://github.com/chef/knife-vcenter/tree/v4.0.0) (2020-04-09)
