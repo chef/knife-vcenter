@@ -104,7 +104,7 @@ class Chef
             @ipaddress = clone_obj.clone
 
             # return an object from the restapi
-            return get_server(options[:name])
+            get_server(options[:name])
 
           when "create"
 

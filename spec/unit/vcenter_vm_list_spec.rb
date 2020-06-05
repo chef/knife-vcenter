@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 #
 # Author:: Chef Partner Engineering (<partnereng@chef.io>)
-# Copyright:: Copyright (c) 2017-2018 Chef Software, Inc.
+# Copyright:: Copyright (c) Chef Software Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,13 +21,6 @@ require "spec_helper"
 require "chef/knife/vcenter_vm_list"
 require "support/shared_examples_for_command"
 
-class PowerStatus < BasicObject
-  attr_reader :value
-  def initialize(state)
-    @value = state
-  end
-end
-
 describe Chef::Knife::Cloud::VcenterVmList do
   it_behaves_like Chef::Knife::Cloud::Command, Chef::Knife::Cloud::VcenterVmList.new
 
@@ -37,21 +30,21 @@ describe Chef::Knife::Cloud::VcenterVmList do
     context 'when the power is "POWERED_ON"' do
       it "displays with green" do
         expect(subject.ui).to receive(:color).with("POWERED_ON", :green)
-        subject.format_power_status(PowerStatus.new("POWERED_ON"))
+        subject.format_power_status("POWERED_ON")
       end
     end
 
     context 'when the power is "POWERED_OFF"' do
       it "displays with red" do
         expect(subject.ui).to receive(:color).with("POWERED_OFF", :red)
-        subject.format_power_status(PowerStatus.new("POWERED_OFF"))
+        subject.format_power_status("POWERED_OFF")
       end
     end
 
     context 'when the power is "SUSPENDED"' do
       it "displays with red" do
         expect(subject.ui).to receive(:color).with("SUSPENDED", :yellow)
-        subject.format_power_status(PowerStatus.new("SUSPENDED"))
+        subject.format_power_status("SUSPENDED")
       end
     end
   end

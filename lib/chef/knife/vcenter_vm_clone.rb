@@ -2,7 +2,7 @@
 
 #
 # Author:: Chef Partner Engineering (<partnereng@chef.io>)
-# Copyright:: Copyright (c) 2017-2018 Chef Software, Inc.
+# Copyright:: Copyright (c) Chef Software Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -89,12 +89,12 @@ class Chef
           @create_options = {
             name: @name_args[0],
             type: "clone",
-            template: locate_config_value(:template),
-            targethost: locate_config_value(:targethost),
-            datacenter: locate_config_value(:datacenter),
-            poweron: !locate_config_value(:disable_power_on),
-            folder: locate_config_value(:folder),
-            resource_pool: locate_config_value(:pool),
+            template: config[:template],
+            targethost: config[:targethost],
+            datacenter: config[:datacenter],
+            poweron: !config[:disable_power_on],
+            folder: config[:folder],
+            resource_pool: config[:pool],
           }
         end
 
@@ -103,7 +103,7 @@ class Chef
         def before_bootstrap
           super
 
-          config[:chef_node_name] = locate_config_value(:chef_node_name) || server.name
+          config[:chef_node_name] = config[:chef_node_name] || server.name
 
           config[:bootstrap_ip_address] = hostname_for_server
         end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 #
 # Author:: Chef Partner Engineering (<partnereng@chef.io>)
-# Copyright:: Copyright (c) 2017-2018 Chef Software, Inc.
+# Copyright:: Copyright (c) Chef Software Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -75,10 +75,10 @@ class Chef
           @create_options = {
             name: @name_args[0],
             type: "create",
-            targethost: locate_config_value(:targethost),
-            folder: locate_config_value(:folder),
-            datastore: locate_config_value(:datastore),
-            resource_pool: locate_config_value(:resource_pool),
+            targethost: config[:targethost],
+            folder: config[:folder],
+            datastore: config[:datastore],
+            resource_pool: config[:resource_pool],
           }
 
           puts @create_options
