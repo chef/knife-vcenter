@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 #
 # Author:: Chef Partner Engineering (<partnereng@chef.io>)
-# Copyright:: Copyright (c) 2017-2018 Chef Software, Inc.
+# Copyright:: Copyright (c) Chef Software Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,16 +31,16 @@ class Chef
         # Creates the object for vCenterService
         #
         def create_service_instance
-          Chef::Knife::Cloud::VcenterService.new(username: locate_config_value(:vcenter_username),
-                                                 password: locate_config_value(:vcenter_password),
-                                                 host: locate_config_value(:vcenter_host),
+          Chef::Knife::Cloud::VcenterService.new(username: config[:vcenter_username],
+                                                 password: config[:vcenter_password],
+                                                 host: config[:vcenter_host],
                                                  verify_ssl: verify_ssl?)
         end
 
         # Do we have valid SSL?
         #
         def verify_ssl?
-          !locate_config_value(:vcenter_disable_ssl_verify)
+          !config[:vcenter_disable_ssl_verify]
         end
 
         # Validate the options and fail out if something isn't there
@@ -54,7 +54,7 @@ class Chef
         #
         # @param [Object] keys makes sure that the values are all not nil
         def check_for_missing_config_values!(*keys)
-          missing = keys.select { |x| locate_config_value(x).nil? }
+          missing = keys.select { |x| config[x].nil? }
 
           unless missing.empty?
             ui.error(format("The following required parameters are missing: %s", missing.join(", ")))
