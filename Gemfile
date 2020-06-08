@@ -15,7 +15,7 @@ group :test do
   gem "rubocop-rspec", "~> 1.18"
   if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.7")
     gem "chef-zero", "~> 15"
-    gem "chef", "~> 15"
+    gem "chef", "~> 16"
   end
 end
 
