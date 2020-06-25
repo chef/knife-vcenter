@@ -35,6 +35,7 @@ class Chef
         # lazy load this file as it includes vmware deps that we only want at plugin runtime
         deps do
           require_relative "cloud/vcenter_service"
+          include VcenterServiceHelpers
         end
 
         # rubocop:disable Style/GuardClause
