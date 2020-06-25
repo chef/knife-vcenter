@@ -1,8 +1,16 @@
 # Change Log
 
+<!-- latest_release 5.0.1 -->
+## [v5.0.1](https://github.com/chef/knife-vcenter/tree/v5.0.1) (2020-06-25)
+
+#### Merged Pull Requests
+- Added vcenter service helpers in knife files. [#40](https://github.com/chef/knife-vcenter/pull/40) ([samshinde](https://github.com/samshinde))
 <!-- latest_release -->
-<!-- latest_release -->
-<!-- release_rollup -->
+<!-- release_rollup since=5.0.0 -->
+### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- Added vcenter service helpers in knife files. [#40](https://github.com/chef/knife-vcenter/pull/40) ([samshinde](https://github.com/samshinde)) <!-- 5.0.1 -->
 <!-- release_rollup -->
 <!-- latest_stable_release -->
 ## [v5.0.0](https://github.com/chef/knife-vcenter/tree/v5.0.0) (2020-06-05)
