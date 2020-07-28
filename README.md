@@ -93,7 +93,7 @@ domain-c123  Cluster  False  False
 
 ## knife vcenter datacenter list
 
-List the data centers configures in the vSPeher environment
+List the data centers configures in the vSphere environment
 
 ```
 $ knife vcenter datacenter list

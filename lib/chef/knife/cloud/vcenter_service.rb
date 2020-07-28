@@ -85,7 +85,7 @@ class Chef
 
             datacenter_exists?(options[:datacenter])
 
-            # Some of ht eoptions need to be the ID of the component in VMware
+            # Some of the options need to be the ID of the component in VMware
             # Update these using the REST API so that they can be passed to the support library
             options[:targethost] = get_host(options[:targethost]).host
 
