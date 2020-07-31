@@ -20,5 +20,5 @@
 # Provisions machines in vCenter
 module KnifeVcenter
   # The version of this amazing Gem, you should <3 it.
-  VERSION = "5.0.2"
+  VERSION = "5.0.3"
 end
