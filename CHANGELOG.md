@@ -10,16 +10,18 @@
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
-- Update rbvmomi requirement from &gt;= 1.11, &lt; 3.0 to &gt;= 1.11, &lt; 4.0 [#43](https://github.com/chef/knife-vcenter/pull/43) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 5.0.4 -->
 - Fix minor spelling mistakes [#42](https://github.com/chef/knife-vcenter/pull/42) ([tas50](https://github.com/tas50)) <!-- 5.0.3 -->
+- Update rbvmomi requirement from &gt;= 1.11, &lt; 3.0 to &gt;= 1.11, &lt; 4.0 [#43](https://github.com/chef/knife-vcenter/pull/43) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 5.0.4 -->
 <!-- release_rollup -->
 <!-- latest_stable_release -->
+## [v5.0.2](https://github.com/chef/knife-vcenter/tree/v5.0.2) (2020-07-31)
+<!-- latest_stable_release -->
+
 ## [v5.0.2](https://github.com/chef/knife-vcenter/tree/v5.0.2) (2020-06-25)
 
 #### Merged Pull Requests
 - Added vcenter service helpers in knife files. [#40](https://github.com/chef/knife-vcenter/pull/40) ([samshinde](https://github.com/samshinde))
 - Fix a chefstyle issue [#41](https://github.com/chef/knife-vcenter/pull/41) ([tas50](https://github.com/tas50))
-<!-- latest_stable_release -->
 
 ## [v5.0.0](https://github.com/chef/knife-vcenter/tree/v5.0.0) (2020-06-05)
 
