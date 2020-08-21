@@ -22,12 +22,12 @@ require "chef/knife/cloud/service"
 require "chef/knife/cloud/helpers"
 require_relative "vcenter_service_helpers"
 require_relative "../../../support/clone_vm"
-require "uri"
-require "json"
-require "ostruct"
+require "uri" unless defined?(URI)
+require "json" unless defined?(JSON)
+require "ostruct" unless defined?(OpenStruct)
 require "vsphere-automation-cis"
 require "vsphere-automation-vcenter"
-require "set"
+require "set" unless defined?(Set)
 
 class Chef
   # The main knife class
@@ -219,11 +219,11 @@ class Chef
           rp_api = VSphereAutomation::VCenter::ResourcePoolApi.new(api_client)
 
           if name.nil?
-            # Remove default pool for first pass (<= 1.2.1 behaviour to pick first user-defined pool found)
+            # Remove default pool for first pass (<= 1.2.1 behavior to pick first user-defined pool found)
             resource_pools = rp_api.list.value.delete_if { |pool| pool.name == "Resources" }
             puts "Search of all resource pools found: " + resource_pools.map(&:name).to_s
 
-            # Revert to default pool, if no user-defined pool found (> 1.2.1 behaviour)
+            # Revert to default pool, if no user-defined pool found (> 1.2.1 behavior)
             # (This one might not be found under some circumstances by the statement above)
             return get_resource_pool("Resources") if resource_pools.empty?
           else
