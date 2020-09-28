@@ -2,14 +2,17 @@
 
 <!-- latest_release -->
 <!-- latest_release -->
-<!-- release_rollup -->
+<!-- release_rollup since=2.8.2 -->
+### Changes not yet released to rubygems.org
 <!-- release_rollup -->
 <!-- latest_stable_release -->
+## [v2.8.2](https://github.com/chef/knife-vcenter/tree/v2.8.2) (2020-09-28)
+<!-- latest_stable_release -->
+
 ## [v5.0.5](https://github.com/chef/knife-vcenter/tree/v5.0.5) (2020-08-21)
 
 #### Merged Pull Requests
 - Optimize our requires [#44](https://github.com/chef/knife-vcenter/pull/44) ([tas50](https://github.com/tas50))
-<!-- latest_stable_release -->
 
 ## [v5.0.4](https://github.com/chef/knife-vcenter/tree/v5.0.4) (2020-07-31)
 
