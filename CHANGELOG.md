@@ -1,9 +1,16 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release 5.0.6 -->
+## [v5.0.6](https://github.com/chef/knife-vcenter/tree/v5.0.6) (2020-11-09)
+
+#### Merged Pull Requests
+- Update rubocop-rspec requirement from ~&gt; 1.18 to ~&gt; 2.0 [#45](https://github.com/chef/knife-vcenter/pull/45) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
 <!-- latest_release -->
 <!-- release_rollup since=2.8.2 -->
 ### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- Update rubocop-rspec requirement from ~&gt; 1.18 to ~&gt; 2.0 [#45](https://github.com/chef/knife-vcenter/pull/45) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 5.0.6 -->
 <!-- release_rollup -->
 <!-- latest_stable_release -->
 ## [v2.8.2](https://github.com/chef/knife-vcenter/tree/v2.8.2) (2020-09-28)
