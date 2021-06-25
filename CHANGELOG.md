@@ -1,15 +1,16 @@
 # Change Log
 
-<!-- latest_release 5.0.6 -->
-## [v5.0.6](https://github.com/chef/knife-vcenter/tree/v5.0.6) (2020-11-09)
+<!-- latest_release 5.0.7 -->
+## [v5.0.7](https://github.com/chef/knife-vcenter/tree/v5.0.7) (2021-06-25)
 
 #### Merged Pull Requests
-- Update rubocop-rspec requirement from ~&gt; 1.18 to ~&gt; 2.0 [#45](https://github.com/chef/knife-vcenter/pull/45) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
+- Upgrade to GitHub-native Dependabot [#46](https://github.com/chef/knife-vcenter/pull/46) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
 <!-- latest_release -->
 <!-- release_rollup since=2.8.2 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- Upgrade to GitHub-native Dependabot [#46](https://github.com/chef/knife-vcenter/pull/46) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 5.0.7 -->
 - Update rubocop-rspec requirement from ~&gt; 1.18 to ~&gt; 2.0 [#45](https://github.com/chef/knife-vcenter/pull/45) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 5.0.6 -->
 <!-- release_rollup -->
 <!-- latest_stable_release -->
