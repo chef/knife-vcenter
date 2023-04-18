@@ -18,9 +18,9 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["LICENSE", "lib/**/*"]
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 2.6"
+  spec.required_ruby_version = ">= 3.1"
 
-  spec.add_dependency "chef", ">= 15.11"
+  spec.add_dependency "chef", ">= 18.2"
   spec.add_dependency "knife-cloud", ">= 4.0"
   spec.add_dependency "rb-readline", "~> 0.5"
   spec.add_dependency "rbvmomi", ">= 1.11", "< 4.0"
