@@ -17,7 +17,7 @@ group :test do
     gem "chef-zero", "~> 15"
     gem "chef", "~> 15"
   end
-  gem "knife"
+  gem "knife", ">= 18.0"
 end
 
 group :debug do
