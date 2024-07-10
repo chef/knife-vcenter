@@ -7,7 +7,7 @@ expeditor:
       retry:
         automatic:
           limit: 1
-      timeout_in_minutes: 60
+      timeout_in_minutes: 30
 
 steps:
 - label: run-lint-and-specs-ruby-3.1
@@ -38,7 +38,6 @@ steps:
   command:
     - bundle config set --local without docs debug
     - bundle install --jobs=7 --retry=3
-    - mkdir -p vendor/bundle
     - bundle exec rake
   expeditor:
     executor:
