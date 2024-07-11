@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 gemspec
 
+gem 'bigdecimal', '3.1.8'
+
 group :docs do
   gem "github-markup"
   gem "redcarpet"
