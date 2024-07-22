@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["LICENSE", "lib/**/*"]
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 3.1"
+  spec.required_ruby_version = ">= 3.3"
 
   spec.add_dependency "chef", ">= 18.0"
   spec.add_dependency "knife-cloud", ">= 4.0"

@@ -9,7 +9,7 @@ group :docs do
 end
 
 group :test do
-  gem "chefstyle", "~> 1.0"
+  gem "chefstyle", "~> 2.2"
   gem "rake", ">= 10.0"
   gem "rspec", "~> 3.7"
   gem "rubocop-rspec", "~> 2.0"
@@ -18,6 +18,7 @@ group :test do
     gem "chef", "~> 15"
   end
   gem "knife", ">= 18.0"
+  gem "unf_ext" "~> 0.0.8.2"
 end
 
 group :debug do
