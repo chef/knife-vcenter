@@ -18,7 +18,6 @@ group :test do
     gem "chef", "~> 15"
   end
   gem "knife", ">= 18.0"
-  gem "unf_ext" "~> 0.0.8.2"
 end
 
 group :debug do
