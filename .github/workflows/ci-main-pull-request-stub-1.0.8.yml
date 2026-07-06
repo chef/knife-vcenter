@@ -121,15 +121,15 @@ jobs:
       polaris-application-name: "Chef-Agents"  # one of these: Chef-Agents, Chef-Automate, Chef-Chef360, Chef-Habitat, Chef-Infrastructure-Server, Chef-Shared-Services, Chef-Other, Chef-Non-Product
       polaris-project-name: ${{ github.event.repository.name }}
 
-      # Perform Grype Scan on habitat packages
-      perform-grype-hab-scan: true
+      # Habitat package scan is intentionally disabled: knife-vcenter does not produce a hab package.
+      perform-grype-hab-scan: false
       grype-hab-build-package: false
       grype-hab-origin: 'chef'
       grype-hab-package: 'knife-vcenter'
       grype-hab-version: ${{ needs.detect-custom-metadata.outputs.versionFromFile }}
       grype-hab-channel: 'unstable'
-      grype-hab-scan-linux: true
-      grype-hab-scan-windows: true
+      grype-hab-scan-linux: false
+      grype-hab-scan-windows: false
       grype-hab-scan-macos: false
 
       # perform SonarQube scan, with or without unit test coverage data
