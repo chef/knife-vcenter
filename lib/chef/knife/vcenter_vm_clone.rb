@@ -38,6 +38,7 @@ class Chef
         # lazy load this file as it includes vmware deps that we only want at plugin runtime
         deps do
           require_relative "cloud/vcenter_service"
+          require_relative "cloud/ssh_bootstrap_protocol_patch"
           include VcenterServiceHelpers
         end
 
@@ -115,6 +116,40 @@ class Chef
           ipaddress = service.ipaddress
 
           ipaddress.nil? ? server.name : ipaddress
+        end
+
+        # Retry bootstrap when local networking has a transient source-address failure.
+        # This keeps a successful clone from failing permanently on a temporary route/interface flap.
+        def after_exec_command
+          bootstrap_attempt = 0
+          max_bootstrap_retries = 3
+
+          begin
+            bootstrap
+          rescue Errno::EADDRNOTAVAIL => e
+            bootstrap_attempt += 1
+
+            if bootstrap_attempt <= max_bootstrap_retries
+              retry_wait = bootstrap_attempt * 5
+              ui.warn(format("Transient local networking error while bootstrapping (%s). Retrying in %d seconds (attempt %d/%d).", e.message, retry_wait, bootstrap_attempt, max_bootstrap_retries))
+              sleep retry_wait
+              retry
+            end
+
+            error_message = format("Bootstrap failed after %d retries due to local networking error: %s", max_bootstrap_retries, e.message)
+            ui.fatal(error_message)
+            cleanup_on_failure
+            raise e, error_message
+          rescue CloudExceptions::BootstrapError => e
+            ui.fatal(e.message)
+            cleanup_on_failure
+            raise e
+          rescue StandardError => e
+            error_message = format("Check if --connection-protocol and --image-os-type is correct. %s", e.message)
+            ui.fatal(error_message)
+            cleanup_on_failure
+            raise e, error_message
+          end
         end
       end
     end

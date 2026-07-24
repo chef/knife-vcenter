@@ -25,7 +25,13 @@ require_relative "../../../support/clone_vm"
 require "uri" unless defined?(URI)
 require "json" unless defined?(JSON)
 require "ostruct" unless defined?(OpenStruct)
-require "vsphere-automation-cis"
+require "vsphere-automation-cis/api/session_api"
+require "vsphere-automation-cis/models/cis_session_create_result"
+require "vsphere-automation-cis/models/vapi_std_errors_unauthenticated"
+require "vsphere-automation-cis/models/vapi_std_errors_unauthenticated_error"
+require "vsphere-automation-cis/models/vapi_std_errors_service_unavailable"
+require "vsphere-automation-cis/models/vapi_std_errors_service_unavailable_error"
+require "vsphere-automation-cis/models/vapi_std_localizable_message"
 require "vsphere-automation-vcenter"
 require "set" unless defined?(Set)
 
@@ -41,35 +47,34 @@ class Chef
         attr_reader :api_client, :session_api, :session_id
         attr_reader :connection_options, :ipaddress
 
-        def initialize(options = {})
-          super(options)
+        def initialize(config: nil, host: nil, username: nil, password: nil, verify_ssl: true, logs: false)
+          super(config: config)
 
           configuration = VSphereAutomation::Configuration.new.tap do |c|
-            c.host = options[:host]
-            c.username = options[:username]
-            c.password = options[:password]
+            c.host = host
+            c.username = username
+            c.password = password
             c.scheme = "https"
-            c.verify_ssl = options[:verify_ssl]
-            c.verify_ssl_host = options[:verify_ssl]
+            c.verify_ssl = verify_ssl
+            c.verify_ssl_host = verify_ssl
           end
 
-          Base.log.warn("SSL Verification is turned OFF") if options[:logs] && !options[:verify_ssl]
+          Base.log.warn("SSL Verification is turned OFF") if logs && !verify_ssl
 
           @api_client = VSphereAutomation::ApiClient.new(configuration)
           api_client.default_headers["Authorization"] = configuration.basic_auth_token
 
-          session_api = VSphereAutomation::CIS::SessionApi.new(api_client)
-          session_id = session_api.create("").value
-
-          api_client.default_headers["vmware-api-session-id"] = session_id
-
           # Set the class properties for the rbvmomi connections
           @connection_options = {
-            user: options[:username],
-            password: options[:password],
-            insecure: options[:verify_ssl] ? false : true,
-            host: options[:host],
+            user: username,
+            password: password,
+            insecure: verify_ssl ? false : true,
+            host: host,
           }
+
+          @session_id = create_api_session_id
+
+          api_client.default_headers["vmware-api-session-id"] = @session_id
         end
 
         # Creates the server
@@ -137,6 +142,7 @@ class Chef
         #
         def list_servers
           vms = VSphereAutomation::VCenter::VMApi.new(api_client).list.value
+          vms = validate_list_response!(vms, "virtual machines")
 
           # list_resource_command uses .send(:name) syntax, so convert to OpenStruct to keep it compatible
           vms.map { |vmsummary| OpenStruct.new(vmsummary.to_hash) }
@@ -145,19 +151,22 @@ class Chef
         # Return a list of the hosts in the vCenter
         #
         def list_hosts
-          VSphereAutomation::VCenter::HostApi.new(api_client).list.value
+          hosts = VSphereAutomation::VCenter::HostApi.new(api_client).list.value
+          validate_list_response!(hosts, "hosts")
         end
 
         # Return a list of the datacenters in the vCenter
         #
         def list_datacenters
-          VSphereAutomation::VCenter::DatacenterApi.new(api_client).list.value
+          datacenters = VSphereAutomation::VCenter::DatacenterApi.new(api_client).list.value
+          validate_list_response!(datacenters, "datacenters")
         end
 
         # Return a list of the clusters in the vCenter
         #
         def list_clusters
-          VSphereAutomation::VCenter::ClusterApi.new(api_client).list.value
+          clusters = VSphereAutomation::VCenter::ClusterApi.new(api_client).list.value
+          validate_list_response!(clusters, "clusters")
         end
 
         # Checks to see if the datacenter exists in the vCenter
@@ -299,6 +308,32 @@ class Chef
         #         end
 
         private
+
+        def create_api_session_id
+          session_api = VSphereAutomation::CIS::SessionApi.new(api_client)
+          session_response = session_api.create("")
+
+          if session_response.respond_to?(:value) && session_response.value.is_a?(String) && !session_response.value.empty?
+            return session_response.value
+          end
+
+          response_type = session_response.class.name
+          if response_type.end_with?("VapiStdErrorsUnauthenticatedError") || response_type.end_with?("VapiStdErrorsUnauthenticated")
+            raise format("Authentication to vCenter failed for user %s on host %s", connection_options[:user], connection_options[:host])
+          end
+
+          raise format("Unable to establish a vCenter session on host %s: %s", connection_options[:host], response_type)
+        end
+
+        def validate_list_response!(resources, resource_type)
+          return resources if resources.is_a?(Array)
+
+          if resources.class.name.end_with?("VapiStdErrorsUnauthenticated")
+            raise format("Authentication to vCenter failed for user %s on host %s", connection_options[:user], connection_options[:host])
+          end
+
+          raise format("Unexpected vCenter response while listing %s: %s", resource_type, resources.class.name)
+        end
 
         def cleanup
           session_svc.delete unless session_id.nil?
