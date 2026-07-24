@@ -57,19 +57,56 @@ class Support
       task.wait_for_completion
 
       # get the IP address of the machine for bootstrapping
-      # machine name is based on the path, e.g. that includes the folder
-      name = options[:folder].nil? ? options[:name] : format("%s/%s", options[:folder][:name], options[:name])
-      new_vm = dc.find_vm(name)
+      new_vm = locate_new_vm(dc)
 
       if new_vm.nil?
-        puts format("Unable to find machine: %s", name)
+        puts format("Unable to find machine: %s", options[:name])
       else
         puts "Waiting for network interfaces to become available..."
-        sleep 2 while new_vm.guest.net.empty? || !new_vm.guest.ipAddress
-        new_vm.guest.net[0].ipConfig.ipAddress.detect do |addr|
-          addr.origin != "linklayer"
-        end.ipAddress
+        bootstrap_ip_for_vm(new_vm)
       end
+    end
+
+    private
+
+    def locate_new_vm(datacenter)
+      vm_name = options[:name]
+
+      if options[:folder]
+        folder_vm_name = format("%s/%s", options[:folder][:name], vm_name)
+        vm = datacenter.find_vm(folder_vm_name)
+        return vm unless vm.nil?
+      end
+
+      datacenter.find_vm(vm_name)
+    end
+
+    def bootstrap_ip_for_vm(vm, timeout: 300, interval: 2)
+      deadline = Time.now + timeout
+
+      loop do
+        ipaddress = extract_bootstrap_ip(vm)
+        return ipaddress unless ipaddress.nil?
+
+        return nil if Time.now >= deadline
+
+        sleep interval
+      end
+    end
+
+    def extract_bootstrap_ip(vm)
+      guest = vm.guest
+
+      addresses = guest.net.to_a.flat_map do |nic|
+        nic.ipConfig&.ipAddress.to_a.map(&:ipAddress)
+      end.compact
+
+      ipv4 = addresses.find { |addr| addr.include?(".") && !addr.start_with?("169.254.") }
+      return ipv4 unless ipv4.nil?
+
+      return nil if guest.ipAddress.nil? || !guest.ipAddress.include?(".")
+
+      guest.ipAddress.start_with?("169.254.") ? nil : guest.ipAddress
     end
   end
 end
