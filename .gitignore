@@ -19,3 +19,7 @@ mkmf.log
 local/
 .vscode/
 .chef/
+test/e2e/results/
+test/e2e/my-e2e.env
+test/e2e/*.env
+!test/e2e/e2e.env.example
