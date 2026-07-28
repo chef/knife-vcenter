@@ -65,13 +65,10 @@ describe Chef::Knife::Cloud::SshBootstrapProtocol do
 
   describe "regression: the actual root cause this patch fixes" do
     it "documents that TCPSocket.new(host, nil) is what upstream's missing default caused" do
-      # This is not a mock - it demonstrates, at the Ruby level, exactly why the
-      # bootstrap used to hang forever: upstream passed a nil port (because it
-      # never defaulted to 22), and TCPSocket.new(host, nil) raises
-      # Errno::EADDRNOTAVAIL deterministically regardless of whether the host
-      # is reachable. Our wait_for_server_ready override above ensures this
-      # patched protocol never passes nil for the port.
-      expect { TCPSocket.new("127.0.0.1", nil) }.to raise_error(Errno::EADDRNOTAVAIL)
+      # Real (non-mocked) socket connect. Confirms a nil port always raises a
+      # connect(2) SystemCallError (errno is OS-dependent: EADDRNOTAVAIL or
+      # ECONNREFUSED), which is why wait_for_server_ready must never pass nil.
+      expect { TCPSocket.new("127.0.0.1", nil) }.to raise_error(SystemCallError)
     end
   end
 
