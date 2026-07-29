@@ -135,6 +135,11 @@ class Chef
             rescue StandardError => e
               puts e.message
             end
+
+            # vm_api.create only returns the new VM's ID as a raw String, not
+            # a summary object with .vm/.name/.power_state (unlike "clone"
+            # above), so fetch the full summary the same way.
+            get_server(options[:name])
           end
         end
 

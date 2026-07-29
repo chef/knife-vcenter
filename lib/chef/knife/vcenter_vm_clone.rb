@@ -39,6 +39,7 @@ class Chef
         deps do
           require_relative "cloud/vcenter_service"
           require_relative "cloud/ssh_bootstrap_protocol_patch"
+          require_relative "cloud/winrm_bootstrap_protocol_patch"
           include VcenterServiceHelpers
         end
 

@@ -95,7 +95,6 @@ class Chef
           record_ssh_probe_failure(hostname, e)
           backoff_before_next_ssh_probe
           false
-        # This happens on some mobile phone networks
         rescue Errno::ECONNRESET => e
           Chef::Log.debug("ssh reset its connection: #{hostname}")
           record_ssh_probe_failure(hostname, e)
