@@ -9,7 +9,7 @@ group :docs do
 end
 
 group :test do
-  gem "cookstyle"
+  gem "cookstyle", "~> 8.7"
   gem "rake", ">= 10.0"
   gem "rspec", "~> 3.7"
   gem "rubocop-rspec", "~> 2.0"
