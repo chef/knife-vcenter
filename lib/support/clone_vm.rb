@@ -45,8 +45,8 @@ class Support
       relocate_spec.pool = options[:resource_pool]
 
       clone_spec = RbVmomi::VIM.VirtualMachineCloneSpec(location: relocate_spec,
-                                                        powerOn: options[:poweron],
-                                                        template: false)
+        powerOn: options[:poweron],
+        template: false)
 
       # Set the folder to use
       dest_folder = options[:folder].nil? ? src_vm.parent : options[:folder][:id]

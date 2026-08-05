@@ -31,11 +31,10 @@ class Chef
         # Creates the object for vCenterService
         #
         def create_service_instance
-          Chef::Knife::Cloud::VcenterService.new(config: config,
-                                                 username: config[:vcenter_username],
-                                                 password: config[:vcenter_password],
-                                                 host: config[:vcenter_host],
-                                                 verify_ssl: verify_ssl?)
+          Chef::Knife::Cloud::VcenterService.new(username: config[:vcenter_username],
+            password: config[:vcenter_password],
+            host: config[:vcenter_host],
+            verify_ssl: verify_ssl?)
         end
 
         # Do we have valid SSL?
