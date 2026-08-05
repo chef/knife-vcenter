@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 #
 # Author:: Chef Partner Engineering (<partnereng@chef.io>)
-# Copyright:: Copyright (c) 2017-2018 Chef Software, Inc.
+# Copyright:: Copyright (c) 2017-2024 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,5 +20,5 @@
 # Provisions machines in vCenter
 module KnifeVcenter
   # The version of this amazing Gem, you should <3 it.
-  VERSION = "5.0.8"
+  VERSION = "5.0.9"
 end
