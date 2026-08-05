@@ -1,15 +1,16 @@
 # Change Log
 
-<!-- latest_release 5.1.0 -->
-## [v5.1.0](https://github.com/chef/knife-vcenter/tree/v5.1.0) (2026-08-05)
+<!-- latest_release 5.1.1 -->
+## [v5.1.1](https://github.com/chef/knife-vcenter/tree/v5.1.1) (2026-08-05)
 
 #### Merged Pull Requests
-- [CHEF-32139] Fix knife vcenter vm clone hanging/failing during SSH bootstrap [#67](https://github.com/chef/knife-vcenter/pull/67) ([ashiqueps](https://github.com/ashiqueps))
+- Replace deprecated Chefstyle with Cookstyle [#69](https://github.com/chef/knife-vcenter/pull/69) ([ashiqueps](https://github.com/ashiqueps))
 <!-- latest_release -->
 <!-- release_rollup since=2.8.2 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- Replace deprecated Chefstyle with Cookstyle [#69](https://github.com/chef/knife-vcenter/pull/69) ([ashiqueps](https://github.com/ashiqueps)) <!-- 5.1.1 -->
 - [CHEF-32139] Fix knife vcenter vm clone hanging/failing during SSH bootstrap [#67](https://github.com/chef/knife-vcenter/pull/67) ([ashiqueps](https://github.com/ashiqueps)) <!-- 5.1.0 -->
 - CHEF-27665 Update and standardize copyright notices to Progress Software Corporation - copyright_update [#64](https://github.com/chef/knife-vcenter/pull/64) ([clintoncwolfe](https://github.com/clintoncwolfe)) <!-- 5.0.9 -->
 - Ruby 3.4 upgrade and Copilot instructions [#65](https://github.com/chef/knife-vcenter/pull/65) ([ashiqueps](https://github.com/ashiqueps)) <!-- 5.0.8 -->
