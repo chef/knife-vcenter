@@ -1,25 +1,22 @@
 # Change Log
 
-<!-- latest_release 5.1.1 -->
-## [v5.1.1](https://github.com/chef/knife-vcenter/tree/v5.1.1) (2026-08-05)
-
-#### Merged Pull Requests
-- Replace deprecated Chefstyle with Cookstyle [#69](https://github.com/chef/knife-vcenter/pull/69) ([ashiqueps](https://github.com/ashiqueps))
 <!-- latest_release -->
-<!-- release_rollup since=2.8.2 -->
-### Changes not yet released to rubygems.org
-
-#### Merged Pull Requests
-- Replace deprecated Chefstyle with Cookstyle [#69](https://github.com/chef/knife-vcenter/pull/69) ([ashiqueps](https://github.com/ashiqueps)) <!-- 5.1.1 -->
-- [CHEF-32139] Fix knife vcenter vm clone hanging/failing during SSH bootstrap [#67](https://github.com/chef/knife-vcenter/pull/67) ([ashiqueps](https://github.com/ashiqueps)) <!-- 5.1.0 -->
-- CHEF-27665 Update and standardize copyright notices to Progress Software Corporation - copyright_update [#64](https://github.com/chef/knife-vcenter/pull/64) ([clintoncwolfe](https://github.com/clintoncwolfe)) <!-- 5.0.9 -->
-- Ruby 3.4 upgrade and Copilot instructions [#65](https://github.com/chef/knife-vcenter/pull/65) ([ashiqueps](https://github.com/ashiqueps)) <!-- 5.0.8 -->
-- Upgrade to GitHub-native Dependabot [#46](https://github.com/chef/knife-vcenter/pull/46) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 5.0.7 -->
-- Update rubocop-rspec requirement from ~&gt; 1.18 to ~&gt; 2.0 [#45](https://github.com/chef/knife-vcenter/pull/45) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 5.0.6 -->
+<!-- latest_release -->
+<!-- release_rollup -->
 <!-- release_rollup -->
 <!-- latest_stable_release -->
-## [v2.8.2](https://github.com/chef/knife-vcenter/tree/v2.8.2) (2020-09-28)
+## [v5.1.1](https://github.com/chef/knife-vcenter/tree/v5.1.1) (2026-08-18)
+
+#### Merged Pull Requests
+- Update rubocop-rspec requirement from ~&gt; 1.18 to ~&gt; 2.0 [#45](https://github.com/chef/knife-vcenter/pull/45) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
+- Upgrade to GitHub-native Dependabot [#46](https://github.com/chef/knife-vcenter/pull/46) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
+- Ruby 3.4 upgrade and Copilot instructions [#65](https://github.com/chef/knife-vcenter/pull/65) ([ashiqueps](https://github.com/ashiqueps))
+- CHEF-27665 Update and standardize copyright notices to Progress Software Corporation - copyright_update [#64](https://github.com/chef/knife-vcenter/pull/64) ([clintoncwolfe](https://github.com/clintoncwolfe))
+- [CHEF-32139] Fix knife vcenter vm clone hanging/failing during SSH bootstrap [#67](https://github.com/chef/knife-vcenter/pull/67) ([ashiqueps](https://github.com/ashiqueps))
+- Replace deprecated Chefstyle with Cookstyle [#69](https://github.com/chef/knife-vcenter/pull/69) ([ashiqueps](https://github.com/ashiqueps))
 <!-- latest_stable_release -->
+
+## [v2.8.2](https://github.com/chef/knife-vcenter/tree/v2.8.2) (2020-09-28)
 
 ## [v5.0.5](https://github.com/chef/knife-vcenter/tree/v5.0.5) (2020-08-21)
 
