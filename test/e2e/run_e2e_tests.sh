@@ -39,8 +39,11 @@
 #   CREATE_TIMEOUT, KNIFE
 #
 # Optional environment variables (no default; feature is skipped if unset):
-#   DATASTORE           Enables TC10/TC11 (`vm create`) when set
-#   VM_PREFIX           Defaults to "e2e-<timestamp>" if unset
+#   DATASTORE                    Enables TC10/TC11 (`vm create`) when set
+#   VCENTER_DISABLE_SSL_VERIFY   Set to "true" to pass --vcenter-disable-ssl-
+#                                verify (self-signed lab certs only). TLS
+#                                verification stays ON by default.
+#   VM_PREFIX                    Defaults to "e2e-<timestamp>" if unset
 #
 # See test/e2e/e2e.env.example for a fill-in-the-blanks template.
 
@@ -61,7 +64,7 @@ ENV_VAR_NAMES=(
   LINUX_CONNECTION_USER LINUX_CONNECTION_PASSWORD WINDOWS_CONNECTION_USER
   WINDOWS_CONNECTION_PASSWORD LINUX_CHEF_VERSIONS WINDOWS_CHEF_VERSIONS
   LIST_TIMEOUT SHOW_TIMEOUT DELETE_TIMEOUT BOOTSTRAP_TIMEOUT CREATE_TIMEOUT
-  VM_PREFIX KNIFE
+  VM_PREFIX KNIFE VCENTER_DISABLE_SSL_VERIFY
 )
 
 # Auto-load test/e2e/e2e.env if present, so you don't have to manually
@@ -122,6 +125,10 @@ RUN_ID="$(date +%Y%m%d-%H%M%S)"
 VM_PREFIX="${VM_PREFIX:-e2e-${RUN_ID}}"
 KNIFE="${KNIFE:-}"
 
+# Secure by default: TLS verification stays ON unless explicitly opted out.
+# Set VCENTER_DISABLE_SSL_VERIFY=true only for lab/self-signed-cert vCenters.
+VCENTER_DISABLE_SSL_VERIFY="${VCENTER_DISABLE_SSL_VERIFY:-false}"
+
 LOG_DIR="$REPO_ROOT/test/e2e/results/${RUN_ID}"
 mkdir -p "$LOG_DIR"
 SUMMARY_CSV="$LOG_DIR/summary.csv"
@@ -137,7 +144,14 @@ SKIP_CLEANUP="false"
 while [ $# -gt 0 ]; do
   case "$1" in
     --quick) MODE="quick" ;;
-    --only) ONLY_IDS="$2"; shift ;;
+    --only)
+      if [ $# -lt 2 ] || [ -z "${2:-}" ]; then
+        echo "ERROR: --only requires a comma-separated list of test IDs, e.g. --only TC05,TC06" >&2
+        exit 1
+      fi
+      ONLY_IDS="$2"
+      shift
+      ;;
     --skip-cleanup) SKIP_CLEANUP="true" ;;
     -h|--help) sed -n '2,40p' "$0"; exit 0 ;;
     *) echo "Unknown option: $1" >&2; exit 1 ;;
@@ -178,8 +192,10 @@ VCENTER_COMMON_OPTS=(
   --vcenter-host "$VCENTER_HOST"
   --vcenter-username "$VCENTER_USERNAME"
   --vcenter-password "$VCENTER_PASSWORD"
-  --vcenter-disable-ssl-verify
 )
+if [ "$VCENTER_DISABLE_SSL_VERIFY" = "true" ]; then
+  VCENTER_COMMON_OPTS+=(--vcenter-disable-ssl-verify)
+fi
 
 # shellcheck disable=SC2206
 KNIFE_CMD=($KNIFE)
@@ -270,6 +286,15 @@ run_test() {
   end=$(date +%s)
   duration=$((end - start))
 
+  # Redact secrets from the raw command output now captured in the log file,
+  # before it is printed to the console, embedded in the report, or read back
+  # anywhere else. Without this, the log file itself (and its console echo
+  # below) could leak passwords the underlying tool happened to print.
+  if [ -s "$log_file" ]; then
+    redact "$(cat "$log_file")" > "$log_file.redacted"
+    mv "$log_file.redacted" "$log_file"
+  fi
+
   if [ $rc -eq 0 ]; then
     status="PASS"
     PASS_COUNT=$((PASS_COUNT + 1))
@@ -303,7 +328,7 @@ run_test() {
     echo "<details><summary>Full output</summary>"
     echo
     echo '```'
-    redact "$(cat "$log_file")"
+    cat "$log_file"
     echo
     echo '```'
     echo "</details>"
