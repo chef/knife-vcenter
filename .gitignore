@@ -19,3 +19,9 @@ mkmf.log
 local/
 .vscode/
 .chef/
+
+# Real e2e test env values (hostnames/credentials) - never commit this.
+# The committed template lives at test/e2e/e2e.env.example.
+test/e2e/e2e.env
+test/e2e/my-e2e.env
+test/e2e/results/*
