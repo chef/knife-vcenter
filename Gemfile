@@ -12,7 +12,7 @@ group :test do
   gem "cookstyle", "~> 8.7"
   gem "rake", ">= 10.0"
   gem "rspec", "~> 3.7"
-  gem "rubocop-rspec", "~> 2.0"
+  gem "rubocop-rspec", "~> 3.9"
   if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.7")
     gem "chef-zero", "~> 15"
     gem "chef", "~> 15"
